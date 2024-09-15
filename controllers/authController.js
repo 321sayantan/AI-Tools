@@ -5,6 +5,7 @@ import errorResponse from "../utils/errorResponse.js";
 // JWT TOKEN
 export const sendToken = (user, statusCode, res) => {
   const token = user.getSignedToken(res);
+  console.log(token)
   res.status(statusCode).json({
     success: true,
     token,
@@ -23,7 +24,7 @@ export const registerController = async (req, res, next) => {
     const user = await userModel.create({ username, email, password });
     sendToken(user, 201, res);
   } catch (error) {
-    console.log(error);
+    console.log(1,error);
     next(error);
   }
 };
@@ -32,6 +33,7 @@ export const registerController = async (req, res, next) => {
 export const loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body)
     // validation
     if (!email || !password) {
       return next(new errorResponse("Please provide email and password"));
