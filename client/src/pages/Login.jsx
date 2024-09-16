@@ -19,7 +19,6 @@ const Login = () => {
   //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
   // states
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,16 +27,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/v1/auth/login", { email, password });
-      console.log(1,data.token.accessToken)
-      if(data.token.accessToken)
-      {
-        localStorage.setItem("authToken", true);
-        toast.success("Login Successful");
-        navigate("/");
-      }
+      await axios.post("http://localhost:5000/api/v1/auth/login", { email, password });
+      toast.success("Login Successfully");
+      localStorage.setItem("authToken", true);
+      navigate("/");
     } catch (err) {
-      console.log(err);
+      console.log(error);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -63,7 +58,8 @@ const Login = () => {
         </Alert>
       </Collapse>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Sign in</Typography>
+        <Typography variant="h3">Sign In</Typography>
+
         <TextField
           label="email"
           type="email"
@@ -93,10 +89,10 @@ const Login = () => {
           size="large"
           sx={{ color: "white", mt: 2 }}
         >
-          Sign Up
+          Sign In
         </Button>
         <Typography mt={2}>
-          Don't have an account ? <Link to="/register">Please Register</Link>
+          Dont have an account ? <Link to="/register">Please Register</Link>
         </Typography>
       </form>
     </Box>

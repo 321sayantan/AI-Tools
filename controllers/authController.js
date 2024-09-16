@@ -1,5 +1,5 @@
 import errorHandler from "../middlewares/errorMiddleware.js";
-import userModel from "../models/userModel.js";
+import userModel from "../models/usermodel.js";
 import errorResponse from "../utils/errorResponse.js";
 
 // JWT TOKEN

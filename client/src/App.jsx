@@ -6,7 +6,7 @@ import { createTheme } from "@mui/material/styles";
 import { Toaster } from "react-hot-toast";
 import { themeSettings } from "./theme";
 import Navbar from "./components/Navbar";
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/HomePage";
 import Register from './pages/Registerpage'
 import Login from "./pages/Login";
 // import Summary from "./pages/Summary";
