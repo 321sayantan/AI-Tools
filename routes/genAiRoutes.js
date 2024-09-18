@@ -5,11 +5,11 @@ import {
   chatbotController,
   jsconverterController,
   scifiImageController,
-} from "../controllers/openAiController.js"; 
+} from "../controllers/genAiRoutes.js"; 
 
 const router = express.Router();
 
-// routes
+
 router.post("/summary", summaryController);
 router.post("/paragraph", paragraphController);
 router.post("/chatbot", chatbotController);

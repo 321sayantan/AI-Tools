@@ -17,19 +17,18 @@ import {
 const Summary = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
+
   const [text, settext] = useState("");
   const [summary, setSummary] = useState("");
   const [error, setError] = useState("");
 
-  //register ctrl
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/openai/summary",
+        "http://localhost:5000/api/v1/genAi/summary",
         { text }
       );
       console.log(data);
@@ -125,7 +124,7 @@ const Summary = () => {
               lineHeight: "450px",
             }}
           >
-            Summary Will Apprea Here
+            Summary Will Appear Here
           </Typography>
         </Card>
       )}
