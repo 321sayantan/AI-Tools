@@ -29,7 +29,7 @@ const Summary = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/openai/summary",
+        "http://localhost:5000/api/v1/genAi/summary",
         { text }
       );
       console.log(data);
@@ -125,7 +125,7 @@ const Summary = () => {
               lineHeight: "450px",
             }}
           >
-            Summary Will Apprea Here
+            Summary Will Appear Here
           </Typography>
         </Card>
       )}

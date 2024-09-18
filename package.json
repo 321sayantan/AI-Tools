@@ -14,6 +14,7 @@
   "author": "Muntajir & Sayantan",
   "license": "MIT",
   "dependencies": {
+    "@google/generative-ai": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "colors": "^1.4.0",

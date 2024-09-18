@@ -5,7 +5,7 @@ import {
   chatbotController,
   jsconverterController,
   scifiImageController,
-} from "../controllers/openAiController.js"; 
+} from "../controllers/genAiController.js"; 
 
 const router = express.Router();
 
