@@ -1,88 +1,138 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import {
+  Box,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  TextField,
+  Button,
+  Alert,
+  Collapse,
+  Card,
+} from "@mui/material";
 
 const ScifiImage = () => {
-  const [prompt, setPrompt] = useState('');
-  const [imageUrl, setImageUrl] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const theme = useTheme();
+  const isNotMobile = useMediaQuery("(min-width: 1000px)");
 
-  const generateImage = async () => {
-    setLoading(true);
-    setError(null);
+  const [text, setText] = useState("");
+  const [image, setImage] = useState("");
+  const [error, setError] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/generate-image', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt }),
-      });
+      const { data } = await axios.post("http://localhost:5000/api/v1/genAi/scifi-image", { text });
+      
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to generate image');
+      const uniqueImageUrl = `${data.imageUrl}?${new Date().getTime()}`;
+      
+      console.log(uniqueImageUrl);
+      setImage(uniqueImageUrl);
+    } catch (err) {
+      console.log(err);
+      if (err.response?.data?.error) {
+        setError(err.response.data.error);
+      } else if (err.message) {
+        setError(err.message);
       }
-
-      const data = await response.json();
-      console.log(data)
-    //   setImageUrl(`http://localhost:5000/${data.imageUrl}`);
-    } catch (error) {
-      console.error('Error:', error);
-      setError(error.message);
-    } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Image Generator</h1>
-      <input
-        type="text"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter an image prompt"
-        style={{
-          padding: '10px',
-          width: '300px',
-          borderRadius: '5px',
-          border: '2px solid #007BFF', // Highlight with a blue border
-        }}
-      />
-      <button
-        onClick={generateImage}
-        style={{
-          padding: '10px 20px',
-          marginLeft: '10px',
-          borderRadius: '5px',
-          border: '2px solid #007BFF', // Highlight with a blue border
-          backgroundColor: '#007BFF',
-          color: '#fff',
-          cursor: 'pointer',
-        }}
-        disabled={loading}
-      >
-        {loading ? 'Generating...' : 'Generate Image'}
-      </button>
-{error && <p style={{ color: 'red', marginTop: '20px' }}>{error}</p>}
+    <Box
+      width={isNotMobile ? "40%" : "80%"}
+      p={"2rem"}
+      m={"2rem auto"}
+      borderRadius={5}
+      sx={{ boxShadow: 5 }}
+      backgroundColor={theme.palette.background.alt}
+    >
+      <Collapse in={!!error}>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      </Collapse>
+      <form onSubmit={handleSubmit}>
+        <Typography variant="h3">Scifi Image</Typography>
 
-      {imageUrl && (
-        <div style={{ marginTop: '20px' }}>
-          <img
-            src={imageUrl}
-            alt="Generated"
-            style={{
-              width: '400px',
-              height: 'auto',
-              border: '2px solid #007BFF', // Highlight with a blue border
-              borderRadius: '10px',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        <TextField
+          placeholder="add your text"
+          type="text"
+          multiline={true}
+          required
+          margin="normal"
+          fullWidth
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          size="large"
+          sx={{ color: "white", mt: 2 }}
+        >
+          Submit
+        </Button>
+        <Typography mt={2}>
+          not this tool? <Link to="/">GO BACK</Link>
+        </Typography>
+      </form>
+
+      <Card
+        sx={{
+          mt: 4,
+          border: 1,
+          boxShadow: 0,
+          borderRadius: 5,
+          borderColor: "natural.medium",
+          bgcolor: "background.default",
+          overflow: "hidden", 
+        }}
+      >
+        {image ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "500px",
+              width: "100%",
+              overflow: "hidden",
             }}
-          />
-        </div>
-      )}
-    </div>
+          >
+            <img
+              src={image}
+              alt="scifiimage"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </Box>
+        ) : (
+          <Typography
+            variant="h5"
+            color="natural.main"
+            sx={{
+              textAlign: "center",
+              verticalAlign: "middle",
+              lineHeight: "450px",
+            }}
+          >
+            Your Scifi Image Will Appear Here
+          </Typography>
+        )}
+      </Card>
+    </Box>
   );
 };
 
