@@ -17,14 +17,13 @@ import {
 const Summary = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
+
   const [text, settext] = useState("");
   const [summary, setSummary] = useState("");
   const [error, setError] = useState("");
 
-  //register ctrl
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
