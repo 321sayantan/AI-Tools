@@ -30,8 +30,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/summary" element={<Summary />} />
           <Route path="/paragraph" element={<Paragraph />} />
-          {/* <Route path="/chatbot" element={<ChatBot />} />
-          <Route path="/js-converter" element={<JsConverter />} /> */}
           <Route path="/scifi-image" element={<ScifiImage />} />
         </Routes>
       </ThemeProvider>
