@@ -8,7 +8,7 @@ import { themeSettings } from "./theme";
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/HomePage";
 import Register from './pages/Registerpage'
-import Login from "./pages/Login";
+import Login from "./pages/LogIn";
 import Summary from "./pages/Summary";
 import Paragraph from "./pages/Paragraph";
 // import ChatBot from "./pages/ChatBot";
