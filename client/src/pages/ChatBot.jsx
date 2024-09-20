@@ -14,23 +14,23 @@ import {
   Card,
 } from "@mui/material";
 
-const Paragraph = () => {
+const ChatBot = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
   // states
   const [text, settext] = useState("");
-  const [para, setPara] = useState("");
+  const [response, setResponse] = useState("");
   const [error, setError] = useState("");
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/v1/genAi/paragraph", { text });
+      const { data } = await axios.post("/api/v1/openai/chatbot", { text });
       console.log(data);
-      setPara(data);
+      setResponse(data);
     } catch (err) {
       console.log(error);
       if (err.response.data.error) {
@@ -58,7 +58,7 @@ const Paragraph = () => {
         </Alert>
       </Collapse>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Generate Paragraph</Typography>
+        <Typography variant="h3">Ask with Chatbot</Typography>
 
         <TextField
           placeholder="add your text"
@@ -80,14 +80,14 @@ const Paragraph = () => {
           size="large"
           sx={{ color: "white", mt: 2 }}
         >
-          Generate
+          Chat
         </Button>
         <Typography mt={2}>
           not this tool ? <Link to="/">GO BACK</Link>
         </Typography>
       </form>
 
-      {para ? (
+      {response ? (
         <Card
           sx={{
             mt: 4,
@@ -99,7 +99,7 @@ const Paragraph = () => {
             bgcolor: "background.default",
           }}
         >
-          <Typography p={2}>{para}</Typography>
+          <Typography p={2}>{response}</Typography>
         </Card>
       ) : (
         <Card
@@ -122,7 +122,7 @@ const Paragraph = () => {
               lineHeight: "450px",
             }}
           >
-            Your Paragraph Will Apprea Here
+            Bot Response
           </Typography>
         </Card>
       )}
@@ -130,4 +130,4 @@ const Paragraph = () => {
   );
 };
 
-export default Paragraph;
+export default ChatBot;
