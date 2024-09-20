@@ -28,7 +28,7 @@ const Paragraph = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/v1/openai/paragraph", { text });
+      const { data } = await axios.post("/api/v1/genAi/paragraph", { text });
       console.log(data);
       setPara(data);
     } catch (err) {

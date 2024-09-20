@@ -13,27 +13,24 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
-import { auto } from "openai/_shims/registry.mjs";
 
-const Summary = () => {
+const ChatBot = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-
+  // states
   const [text, settext] = useState("");
-  const [summary, setSummary] = useState("");
+  const [response, setResponse] = useState("");
   const [error, setError] = useState("");
 
- 
+  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/genAi/summary",
-        { text }
-      );
+      const { data } = await axios.post("/api/v1/openai/chatbot", { text });
       console.log(data);
-      setSummary(data);
+      setResponse(data);
     } catch (err) {
       console.log(error);
       if (err.response.data.error) {
@@ -48,7 +45,6 @@ const Summary = () => {
   };
   return (
     <Box
-    overflow={"auto"}
       width={isNotMobile ? "40%" : "80%"}
       p={"2rem"}
       m={"2rem auto"}
@@ -62,7 +58,7 @@ const Summary = () => {
         </Alert>
       </Collapse>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Summarize Text</Typography>
+        <Typography variant="h3">Ask with Chatbot</Typography>
 
         <TextField
           placeholder="add your text"
@@ -84,14 +80,14 @@ const Summary = () => {
           size="large"
           sx={{ color: "white", mt: 2 }}
         >
-          Submit
+          Chat
         </Button>
         <Typography mt={2}>
           not this tool ? <Link to="/">GO BACK</Link>
         </Typography>
       </form>
 
-      {summary ? (
+      {response ? (
         <Card
           sx={{
             mt: 4,
@@ -103,7 +99,7 @@ const Summary = () => {
             bgcolor: "background.default",
           }}
         >
-          <Typography p={2}>{summary}</Typography>
+          <Typography p={2}>{response}</Typography>
         </Card>
       ) : (
         <Card
@@ -126,7 +122,7 @@ const Summary = () => {
               lineHeight: "450px",
             }}
           >
-            Summary Will Appear Here
+            Bot Response
           </Typography>
         </Card>
       )}
@@ -134,4 +130,4 @@ const Summary = () => {
   );
 };
 
-export default Summary;
+export default ChatBot;
