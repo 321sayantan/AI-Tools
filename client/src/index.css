@@ -20,9 +20,6 @@ html, body {
   flex-direction: column; 
 }
 
-
-
-
 .single-line {
   white-space: nowrap;
 }

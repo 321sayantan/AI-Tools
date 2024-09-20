@@ -11,7 +11,6 @@ import Register from './pages/Registerpage'
 import Login from "./pages/LogIn";
 import Summary from "./pages/Summary";
 import Paragraph from "./pages/Paragraph";
-import ChatBot from "./pages/ChatBot";
 // import JsConverter from "./pages/JsConverter";
 import ScifiImage from "./pages/ScifiImage";
 import ChatBot from "./pages/ChatBot";
@@ -22,8 +21,8 @@ function App() {
 
   return (
     <>
-    
       <ThemeProvider theme={theme}>
+        <Navbar />
         <CssBaseline />
         <Toaster />
         <Routes>
@@ -32,7 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/summary" element={<Summary />} />
           <Route path="/paragraph" element={<Paragraph />} />
-          <Route path="/chatbot" element={<ChatBot/>} />
+          <Route path="/chatbot" element={<ChatBot />} />
           <Route path="/scifi-image" element={<ScifiImage />} />
           <Route path="/chatbot" element={<ChatBot />} />
           <Route path="/js-converter" element={<JsConverter />} />

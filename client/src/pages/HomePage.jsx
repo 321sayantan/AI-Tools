@@ -22,9 +22,9 @@ const Homepage = () => {
   return (
     <>
       <div className="d-flex flex-column h-100 text-center text-bg-dark">
-        <Navbar />
+        {/* <Navbar /> */}
 
-        <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home" style={{ display: "flex", height: "500px", margin: '0 60px' }}>
+        <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-5" style={{ display: "flex", height: "500px", margin: '0 60px' }}>
 
           <div className="col" onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
             <div
