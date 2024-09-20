@@ -1,173 +1,136 @@
+{/* <div className="col">
+<div className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style={{ backgroundImage: "url('/images/textgenerate.jpg')" }}>
+  <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+    <div style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center' }}>
+      <h1>Image Generation</h1>
+    </div>
+    <h6>Generate Sci-fi images</h6>
+  </div>
+</div>
+</div> */}
+
 import React from "react";
-import { Box, Typography, Card, Stack } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import DescriptionRounded from "@mui/icons-material/DescriptionRounded";
-import FormatAlignLeftOutlined from "@mui/icons-material/FormatAlignLeftOutlined";
-import ChatRounded from "@mui/icons-material/ChatRounded";
-const HomePage = () => {
+import Navbar from "../components/Navbar";
+import ChatBot from './ChatBot';
+import Paragraph from './Paragraph';
+
+const Homepage = () => {
   const navigate = useNavigate();
+
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box p={2}>
-          <Typography variant="h4" mb={2} fontWeight="bold">
-            Text Generation
-          </Typography>
-          <Card
-            onClick={() => navigate("/summary")}
-            sx={{
-              boxShadow: 2,
-              borderRadius: 5,
-              height: 190,
-              width: 200,
-              "&:hover": {
-                border: 2,
-                boxShadow: 0,
-                borderColor: "primary.dark",
-                cursor: "pointer",
-              },
-            }}
-          >
-            <DescriptionRounded
-              sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
-            />
-            <Stack p={3} pt={0}>
-              <Typography fontWeight="bold" variant="h5">
-                TEXT SUMAMRY
-              </Typography>
-              <Typography variant="h6">
-                Summarize long text into short sentences
-              </Typography>
-            </Stack>
-          </Card>
-        </Box>
-        <Box p={2}>
-          <Typography variant="h4" mb={2} fontWeight="bold">
-            Parapgraph Generation
-          </Typography>
-          <Card
-            onClick={() => navigate("/paragraph")}
-            sx={{
-              boxShadow: 2,
-              borderRadius: 5,
-              height: 190,
-              width: 200,
-              "&:hover": {
-                border: 2,
-                boxShadow: 0,
-                borderColor: "primary.dark",
-                cursor: "pointer",
-              },
-            }}
-          >
-            <FormatAlignLeftOutlined
-              sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
-            />
-            <Stack p={3} pt={0}>
-              <Typography fontWeight="bold" variant="h5">
-                Parapgraph
-              </Typography>
-              <Typography variant="h6">
-                Generate Paragraph with words
-              </Typography>
-            </Stack>
-          </Card>
-        </Box>
-        <Box p={2}>
-          <Typography variant="h4" mb={2} fontWeight="bold">
-            AI ChatBot
-          </Typography>
-          <Card
-            onClick={() => navigate("/chatbot")}
-            sx={{
-              boxShadow: 2,
-              borderRadius: 5,
-              height: 190,
-              width: 200,
-              "&:hover": {
-                border: 2,
-                boxShadow: 0,
-                borderColor: "primary.dark",
-                cursor: "pointer",
-              },
-            }}
-          >
-            <ChatRounded
-              sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
-            />
-            <Stack p={3} pt={0}>
-              <Typography fontWeight="bold" variant="h5">
-                Chatbot
-              </Typography>
-              <Typography variant="h6">Chat With AI Chatbot</Typography>
-            </Stack>
-          </Card>
-        </Box>
-        <Box p={2}>
-          <Typography variant="h4" mb={2} fontWeight="bold">
-            Javascript Converter
-          </Typography>
-          <Card
-            onClick={() => navigate("/js-converter")}
-            sx={{
-              boxShadow: 2,
-              borderRadius: 5,
-              height: 190,
-              width: 200,
-              "&:hover": {
-                border: 2,
-                boxShadow: 0,
-                borderColor: "primary.dark",
-                cursor: "pointer",
-              },
-            }}
-          >
-            <ChatRounded
-              sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
-            />
-            <Stack p={3} pt={0}>
-              <Typography fontWeight="bold" variant="h5">
-                JS CONVERTER
-              </Typography>
-              <Typography variant="h6">
-                Trasnlate english to javascript code
-              </Typography>
-            </Stack>
-          </Card>
-        </Box>
-        <Box p={2}>
-          <Typography variant="h4" mb={2} fontWeight="bold">
-            AI SCIFI Images
-          </Typography>
-          <Card
-            onClick={() => navigate("/scifi-image")}
-            sx={{
-              boxShadow: 2,
-              borderRadius: 5,
-              height: 190,
-              width: 200,
-              "&:hover": {
-                border: 2,
-                boxShadow: 0,
-                borderColor: "primary.dark",
-                cursor: "pointer",
-              },
-            }}
-          >
-            <ChatRounded
-              sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
-            />
-            <Stack p={3} pt={0}>
-              <Typography fontWeight="bold" variant="h5">
-                Scifi Image
-              </Typography>
-              <Typography variant="h6">Generate Scifi images</Typography>
-            </Stack>
-          </Card>
-        </Box>
-      </Box>
+      <div className="d-flex flex-column h-100 text-center text-bg-dark">
+        <Navbar />
+
+        <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home" style={{ display: "flex", height: "500px", margin: '0 60px' }}>
+
+          <div className="col" onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
+            <div
+              className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style={{
+                backgroundImage: "url('/images/textgenerate.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                width: "100%",
+              }}>
+              <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: "center", alignItems: 'center' }}>
+                  <h1>Text Generation</h1>
+                </div>
+
+                <h6>Summarize long text into short sentences</h6>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div className="col" onClick={() => navigate("/paragraph")} style={{ cursor: "pointer" }}>
+            <div
+              className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style={{
+                backgroundImage: "url('/images/paragraph.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                width: "100%",
+              }}>
+              <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: "center", alignItems: 'center' }}>
+                  <h1>Paragraph Generator</h1>
+                </div>
+
+                <h6>Generate Paragraph with words</h6>
+              </div>
+            </div>
+          </div>
+
+          <div className="col" onClick={() => navigate("/chatbot")} style={{ cursor: "pointer" }}>
+            <div
+              className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style={{
+                backgroundImage: "url('/images/chatbot.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                width: "100%",
+              }}>
+              <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: "center", alignItems: 'center' }}>
+                  <h1>AI ChatBot</h1>
+                </div>
+
+                <h6>Have a conversation with our ChatBot</h6>
+              </div>
+            </div>
+          </div>
+
+          <div className="col" onClick={() => navigate("/js-converter")} style={{ cursor: "pointer" }}>
+            <div
+              className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style={{
+                backgroundImage: "url('/images/code.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                width: "100%",
+              }}>
+              <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: "center", alignItems: 'center' }}>
+                  <h1>JS Converter</h1>
+                </div>
+
+                <h6>Translate English to JavaScript code</h6>
+              </div>
+            </div>
+          </div>
+
+          <div className="col" onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
+            <div
+              className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+              style={{
+                backgroundImage: "url('/images/image.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                width: "100%",
+              }}>
+              <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: "center", alignItems: 'center' }}>
+                  <h1>Image Generation</h1>
+                </div>
+
+                <h6>Generate Sci-fi Images</h6>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
     </>
   );
 };
 
-export default HomePage;
+export default Homepage;
+
+

@@ -14,27 +14,25 @@ import {
   Card,
 } from "@mui/material";
 
-const Paragraph = () => {
+const JsConverter = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
   // states
   const [text, settext] = useState("");
-  const [para, setPara] = useState("");
+  const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
   //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      const { data } = await axios.post("http://localhost:5000/api/v1/genAi/paragraph", { text });
-=======
-      const { data } = await axios.post("/api/v1/genAi/paragraph", { text });
->>>>>>> 3d4bb893e59d0805a14bb170cbaec40c0ee7ee2f
+      const { data } = await axios.post("/api/v1/openai/js-converter", {
+        text,
+      });
       console.log(data);
-      setPara(data);
+      setCode(data);
     } catch (err) {
       console.log(error);
       if (err.response.data.error) {
@@ -49,6 +47,7 @@ const Paragraph = () => {
   };
   return (
     <Box
+     overflow={"auto"}
       width={isNotMobile ? "40%" : "80%"}
       p={"2rem"}
       m={"2rem auto"}
@@ -62,7 +61,7 @@ const Paragraph = () => {
         </Alert>
       </Collapse>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Generate Paragraph</Typography>
+        <Typography variant="h3">JS Converter</Typography>
 
         <TextField
           placeholder="add your text"
@@ -84,14 +83,14 @@ const Paragraph = () => {
           size="large"
           sx={{ color: "white", mt: 2 }}
         >
-          Generate
+          Convert
         </Button>
         <Typography mt={2}>
           not this tool ? <Link to="/">GO BACK</Link>
         </Typography>
       </form>
 
-      {para ? (
+      {code ? (
         <Card
           sx={{
             mt: 4,
@@ -101,9 +100,12 @@ const Paragraph = () => {
             borderRadius: 5,
             borderColor: "natural.medium",
             bgcolor: "background.default",
+            overflow: "auto",
           }}
         >
-          <Typography p={2}>{para}</Typography>
+          <pre>
+            <Typography p={2}>{code}</Typography>
+          </pre>
         </Card>
       ) : (
         <Card
@@ -126,7 +128,7 @@ const Paragraph = () => {
               lineHeight: "450px",
             }}
           >
-            Your Paragraph Will Apprea Here
+            Your Code Will Appear Here!
           </Typography>
         </Card>
       )}
@@ -134,4 +136,4 @@ const Paragraph = () => {
   );
 };
 
-export default Paragraph;
+export default JsConverter;

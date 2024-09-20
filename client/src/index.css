@@ -8,17 +8,57 @@ body {
   font-family: "roboto", sans-serif;
 }
 
-a {
-  color: #60bf70 !important;
-  text-decoration: none;
-  padding: 20px;
-  margin-top: 20px;
+
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-a:hover {
-  color: black !important;
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column; 
 }
 
-a.active {
-  color: #57d96d !important;
+
+
+
+.single-line {
+  white-space: nowrap;
+}
+
+
+/* Default margin for larger screens */
+.navbar-title {
+  margin-left: -100px; 
+}
+
+/* Adjust margin for smaller screens */
+@media (max-width: 576px) {
+  .navbar-title {
+    margin-left: 10px; 
+  }
+}
+
+
+/* Hide scrollbars */
+body {
+  overflow: hidden; /* This will hide both horizontal and vertical scrollbars */
+}
+
+/* Optional: If you want to allow scrolling but just hide the scrollbar */
+::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+body {
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+}
+
+
+.home{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

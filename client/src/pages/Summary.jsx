@@ -13,6 +13,7 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
+import { auto } from "openai/_shims/registry.mjs";
 
 const Summary = () => {
   const theme = useTheme();
@@ -47,6 +48,7 @@ const Summary = () => {
   };
   return (
     <Box
+    overflow={"auto"}
       width={isNotMobile ? "40%" : "80%"}
       p={"2rem"}
       m={"2rem auto"}
