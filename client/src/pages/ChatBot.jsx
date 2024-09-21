@@ -45,6 +45,7 @@ const ChatBot = () => {
   };
   return (
     <Box
+      overflow={"auto"}
       width={isNotMobile ? "40%" : "80%"}
       p={"2rem"}
       m={"2rem auto"}
