@@ -38,19 +38,9 @@ html, body {
 }
 
 
-/* Hide scrollbars */
-body {
-  overflow: hidden; /* This will hide both horizontal and vertical scrollbars */
-}
-
-/* Optional: If you want to allow scrolling but just hide the scrollbar */
-::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
-}
 
 body {
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
-  scrollbar-width: none; /* For Firefox */
+  overflow: auto; 
 }
 
 

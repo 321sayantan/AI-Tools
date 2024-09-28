@@ -11,18 +11,18 @@ import Register from './pages/Registerpage'
 import Login from "./pages/LogIn";
 import Summary from "./pages/Summary";
 import Paragraph from "./pages/Paragraph";
-// import JsConverter from "./pages/JsConverter";
 import ScifiImage from "./pages/ScifiImage";
 import ChatBot from "./pages/ChatBot";
 import JsConverter from "./pages/JsConverter";
+
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings()), []);
 
   return (
     <>
+      <Navbar />
       <ThemeProvider theme={theme}>
-        <Navbar />
         <CssBaseline />
         <Toaster />
         <Routes>
@@ -37,6 +37,7 @@ function App() {
           <Route path="/js-converter" element={<JsConverter />} />
         </Routes>
       </ThemeProvider>
+
     </>
   );
 }
