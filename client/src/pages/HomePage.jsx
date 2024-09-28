@@ -1,14 +1,3 @@
-{/* <div className="col">
-<div className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style={{ backgroundImage: "url('/images/textgenerate.jpg')" }}>
-  <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-    <div style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center' }}>
-      <h1>Image Generation</h1>
-    </div>
-    <h6>Generate Sci-fi images</h6>
-  </div>
-</div>
-</div> */}
-
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -22,8 +11,6 @@ const Homepage = () => {
   return (
     <>
       <div className="d-flex flex-column h-100 text-center text-bg-dark">
-        {/* <Navbar /> */}
-
         <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-5" style={{ display: "flex", height: "500px", margin: '0 60px' }}>
 
           <div className="col" onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
