@@ -16,18 +16,23 @@ export const sendToken = (user, statusCode, res) => {
 export const registerController = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    // existing user
+
+    // Check for existing user by email
     const existingEmail = await userModel.findOne({ email });
     if (existingEmail) {
-      return next(new errorResponse("Email is already registered", 500));
+      return res.status(400).json({ error: "Email is already registered" }); // Return error response
     }
+
+    // Create new user
     const user = await userModel.create({ username, email, password });
     sendToken(user, 201, res);
   } catch (error) {
-    console.log(1,error);
-    next(error);
+    console.log(error); // Log the error for debugging
+    return res.status(500).json({ error: "Internal Server Error" }); // Generic error message
   }
 };
+
+
 
 // LOGIN
 export const loginController = async (req, res, next) => {

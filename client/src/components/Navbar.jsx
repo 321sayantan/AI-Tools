@@ -6,7 +6,7 @@ import "../css/navbar.css";
 import "bootstrap";
 
 const Navbar = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const loggedIn = JSON.parse(localStorage.getItem("authToken"));
 
   const handleLogout = async () => {
@@ -40,14 +40,34 @@ const Navbar = () => {
             </a>
 
             <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><NavLink to="/" className="nav-link px-2 text-secondary">Home</NavLink></li>
-              <li><NavLink to="/faqs" className="nav-link px-2 text-white">FAQs</NavLink></li>
-              <li><NavLink to="/about" className="nav-link px-2 text-white">About</NavLink></li>
+              <li>
+                <NavLink to="/" className="nav-link px-2 text-secondary">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/faqs" className="nav-link px-2 text-white">FAQs</NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" className="nav-link px-2 text-white">About</NavLink>
+              </li>
             </ul>
 
             <div className="text-end">
-              <button type="button" className="btn btn-outline-light me-2" onClick={handleLogin}>Login</button>
-              <button type="button" className="btn btn-warning" onClick={handleSignUp}>Sign-up</button>
+              {loggedIn ? (
+                <>
+                  <button type="button" className="btn btn-outline-light me-2" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button type="button" className="btn btn-outline-light me-2" onClick={handleLogin}>
+                    Login
+                  </button>
+                  <button type="button" className="btn btn-warning" onClick={handleSignUp}>
+                    Sign-up
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
