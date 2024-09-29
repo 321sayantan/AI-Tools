@@ -13,7 +13,7 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
-import { auto } from "openai/_shims/registry.mjs";
+
 
 const Summary = () => {
   const theme = useTheme();
@@ -47,6 +47,7 @@ const Summary = () => {
     }
   };
   return (
+    <div  className="text-bg-dark h-100 overflow-auto">
     <Box
     overflow={"auto"}
       width={isNotMobile ? "40%" : "80%"}
@@ -54,7 +55,7 @@ const Summary = () => {
       m={"2rem auto"}
       borderRadius={5}
       sx={{ boxShadow: 5 }}
-      backgroundColor={theme.palette.background.alt}
+
     >
       <Collapse in={error}>
         <Alert severity="error" sx={{ mb: 2 }}>
@@ -65,9 +66,10 @@ const Summary = () => {
         <Typography variant="h3">Summarize Text</Typography>
 
         <TextField
-          placeholder="add your text"
+          placeholder="Add your text"
           type="text"
           multiline={true}
+          borderColor="white" 
           required
           margin="normal"
           fullWidth
@@ -75,6 +77,13 @@ const Summary = () => {
           onChange={(e) => {
             settext(e.target.value);
           }}
+          InputProps={{
+              style: { color: "white" }, 
+            }}
+          sx={{
+              input: { color: "white" }, 
+              "& .MuiInputBase-input::placeholder": { color: "white" }, 
+            }}
         />
 
         <Button
@@ -87,12 +96,13 @@ const Summary = () => {
           Submit
         </Button>
         <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
+          Not this tool ? <Link to="/">GO BACK</Link>
         </Typography>
       </form>
 
       {summary ? (
         <Card
+        className="text-bg-dark" 
           sx={{
             mt: 4,
             border: 1,
@@ -100,37 +110,39 @@ const Summary = () => {
             height: "500px",
             borderRadius: 5,
             borderColor: "natural.medium",
-            bgcolor: "background.default",
           }}
         >
           <Typography p={2}>{summary}</Typography>
         </Card>
       ) : (
         <Card
+        className="text-bg-dark" 
           sx={{
             mt: 4,
             border: 1,
             boxShadow: 0,
             height: "500px",
             borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
+            color: "white",
           }}
         >
           <Typography
+          className="text-bg-dark" 
             variant="h5"
-            color="natural.main"
+            
             sx={{
               textAlign: "center",
               verticalAlign: "middel",
               lineHeight: "450px",
+              color: "rgba(255, 255, 255, 0.6) !important",
             }}
           >
-            Summary Will Appear Here
+            Your summary will appear here!
           </Typography>
         </Card>
       )}
     </Box>
+    </div>
   );
 };
 

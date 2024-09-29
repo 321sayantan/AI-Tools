@@ -92,7 +92,7 @@ const Homepage = () => {
             </div>
           </div>
 
-          <div className="col" onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
+          <div className="col" onClick={() => navigate("/scifi-image")} style={{ cursor: "pointer" }}>
             <div
               className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
               style={{

@@ -17,14 +17,12 @@ import {
 const JsConverter = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
+
   const [text, settext] = useState("");
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
-  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -45,94 +43,101 @@ const JsConverter = () => {
       }, 5000);
     }
   };
+
   return (
-    <Box
-     overflow={"auto"}
-      width={isNotMobile ? "40%" : "80%"}
-      p={"2rem"}
-      m={"2rem auto"}
-      borderRadius={5}
-      sx={{ boxShadow: 5 }}
-      backgroundColor={theme.palette.background.alt}
-    >
-      <Collapse in={error}>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      </Collapse>
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h3">JS Converter</Typography>
+    <div className="text-bg-dark h-100 overflow-auto">
+      <Box
+        overflow={"auto"}
+        width={isNotMobile ? "40%" : "80%"}
+        p={"2rem"}
+        m={"2rem auto"}
+        borderRadius={5}
+        sx={{ boxShadow: 5 }}
+      >
+        <Collapse in={error}>
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        </Collapse>
+        <form onSubmit={handleSubmit}>
+          <Typography variant="h3">JS Converter</Typography>
 
-        <TextField
-          placeholder="add your text"
-          type="text"
-          multiline={true}
-          required
-          margin="normal"
-          fullWidth
-          value={text}
-          onChange={(e) => {
-            settext(e.target.value);
-          }}
-        />
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          size="large"
-          sx={{ color: "white", mt: 2 }}
-        >
-          Convert
-        </Button>
-        <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
-        </Typography>
-      </form>
-
-      {code ? (
-        <Card
-          sx={{
-            mt: 4,
-            border: 1,
-            boxShadow: 0,
-            height: "500px",
-            borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
-            overflow: "auto",
-          }}
-        >
-          <pre>
-            <Typography p={2}>{code}</Typography>
-          </pre>
-        </Card>
-      ) : (
-        <Card
-          sx={{
-            mt: 4,
-            border: 1,
-            boxShadow: 0,
-            height: "500px",
-            borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
-          }}
-        >
-          <Typography
-            variant="h5"
-            color="natural.main"
+          <TextField
+            placeholder="Add your text"
+            type="text"
+            multiline={true}
+            required
+            margin="normal"
+            fullWidth
+            value={text}
+            onChange={(e) => settext(e.target.value)}
+            InputProps={{
+              style: { color: "white" }, // Set text color to white
+            }}
             sx={{
-              textAlign: "center",
-              verticalAlign: "middel",
-              lineHeight: "450px",
+              input: { color: "white" },
+              "& .MuiInputBase-input::placeholder": { color: "white" }, // Placeholder color
+            }}
+          />
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            size="large"
+            sx={{ color: "white", mt: 2 }}
+          >
+            Convert
+          </Button>
+          <Typography mt={2}>
+            Not this tool? <Link to="/">GO BACK</Link>
+          </Typography>
+        </form>
+
+        {code ? (
+          <Card
+            className="text-bg-dark"
+            sx={{
+              mt: 4,
+              border: 1,
+              boxShadow: 0,
+              height: "500px",
+              borderRadius: 5,
+              borderColor: "natural.medium",
+              overflow: "auto",
             }}
           >
-            Your Code Will Appear Here!
-          </Typography>
-        </Card>
-      )}
-    </Box>
+            <pre>
+              <Typography p={2}>{code}</Typography>
+            </pre>
+          </Card>
+        ) : (
+          <Card
+            className="text-bg-dark"
+            sx={{
+              mt: 4,
+              border: 1,
+              boxShadow: 0,
+              height: "500px",
+              borderRadius: 5,
+              color: "white",
+            }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                textAlign: "center",
+                verticalAlign: "middle",
+                lineHeight: "450px",
+                color: "rgba(255, 255, 255, 0.6) !important",
+              }}
+            >
+              Your Code Will Appear Here!
+            </Typography>
+          </Card>
+        )}
+      </Box>
+    </div>
   );
 };
 

@@ -34,7 +34,12 @@ const Register = () => {
     } catch (err) {
       console.log(err);
       if (err.response?.data?.error) {
-        setError(err.response.data.error);
+        // Handle specific error messages from the server
+        if (err.response.data.error.includes("Email is already registered")) {
+          toast.error("This email is already registered."); // Display toast for already registered email
+        } else {
+          setError(err.response.data.error);
+        }
       } else if (err.message) {
         setError(err.message);
       }
