@@ -26,11 +26,15 @@ const ScifiImage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/openai/scifi-image", { text });
+      const { data } = await axios.post(
+        "http://localhost:5000/api/v1/genAi/scifi-image",
+        { text }
+      );
       console.log(data);
-      setImage(data);
+      // Set image to the imageUrl returned from the server
+      setImage(data.imageUrl); 
     } catch (err) {
-      console.log(error);
+      console.log(err);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -41,7 +45,7 @@ const ScifiImage = () => {
       }, 5000);
     }
   };
-
+  
   return (
     <div className="text-bg-dark h-100 overflow-auto">
       <Box
