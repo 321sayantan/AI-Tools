@@ -35,54 +35,53 @@ export const summaryController = async (req, res) => {
 export const scifiImageController = async (req, res) => {
   const { text } = req.body;
 
-  if (!text) {
-    return res.status(400).json({ error: "Text is required" });
-  }
-
-  const payload = {
-    prompt: text,
-    output_format: "webp"
+  const options = {
+    method: 'POST',
+    url: 'https://text-to-image13.p.rapidapi.com/',
+    headers: {
+      'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+      'x-rapidapi-host': 'text-to-image13.p.rapidapi.com',
+      'Content-Type': 'application/json'
+    },
+    data: {
+      prompt: text || 'cyberpunk cat' 
+    },
+    responseType: 'arraybuffer' 
   };
 
   try {
-    const formData = new FormData();
-    for (const [key, value] of Object.entries(payload)) {
-      formData.append(key, value);
-    }
-
-    const response = await axios.post(
-      `https://api.stability.ai/v2beta/stable-image/generate/ultra`,
-      formData,
-      {
-        validateStatus: undefined,
-        responseType: "arraybuffer",
-        headers: { 
-          ...formData.getHeaders(),
-          Authorization: `Bearer ${process.env.STABILITY_API_KEY}`, 
-          Accept: "image/*" 
-        },
-      }
-    );
+    const response = await axios.request(options);
 
     if (response.status === 200) {
       const uniqueFilename = `${uuidv4()}.webp`;
       const imagePath = path.join(process.cwd(), 'public', uniqueFilename);
+
+    
       fs.writeFileSync(imagePath, Buffer.from(response.data));
 
       const imageUrl = `${req.protocol}://${req.get('host')}/${uniqueFilename}`;
-      res.json({ message: "Image generated and saved successfully!", imageUrl });
       
+
+      res.json({
+        message: "Image generated and saved successfully!",
+        imageUrl
+      });
+
     } else {
+
       throw new Error(`${response.status}: ${response.data.toString()}`);
     }
-  } catch (err) {
-    console.error(err);
+
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
-      error: "Internal Server Error",
-      message: err.message,
+      error: 'Failed to generate image',
+      details: error.message
     });
   }
 };
+
+
 export const paragraphController = async (req, res) => {
   try {
     const { text } = req.body;
@@ -105,10 +104,32 @@ export const paragraphController = async (req, res) => {
   }
 };
 
-export const chatbotController = (req, res) => {
-  res.json({ message: "Chatbot Controller Dummy Response" });
+
+export const jsconverterController = async(req, res) => {
+  try {
+    const { text } = req.body;
+    
+    const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const prompt = `Write javascipt code for: ${text}`;
+    
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    console.log(response.text());
+    
+
+    return res.status(200).json(response.text());
+    
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      error: "Internal Server Error",
+      message: err.message,
+    });
+  }
 };
 
-export const jsconverterController = (req, res) => {
-  res.json({ message: "JS Converter Controller Dummy Response" });
+
+export const chatbotController = async(req, res) => {
+  res.json({ message: "Chatbot Controller Dummy Response" });
 };
