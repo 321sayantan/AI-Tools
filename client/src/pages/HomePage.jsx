@@ -6,7 +6,10 @@ import ChatBot from './ChatBot';
 import Paragraph from './Paragraph';
 import Header from "../components/Header";
 import ToolsList from "../components/ToolsList";
-import Features from "../components/features";
+import Features from "../components/features.jsx";
+import Footer from "../components/footer.jsx";
+import Testimonials from "../components/Testimonials.jsx";
+
 
 const Homepage = () => {
   return (
@@ -15,6 +18,8 @@ const Homepage = () => {
         <Header />   
         <Features />
         <ToolsList />
+        <Testimonials />
+        <Footer />
       </div>
     </>
   );
