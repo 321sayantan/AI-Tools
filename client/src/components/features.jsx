@@ -1,10 +1,9 @@
 import React from 'react'
 import "../css/features.css"
-// import "../assets/bootstrap.min.css"
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 const Features = () => {
   return (
+    <>
     <div className="features text-start">
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
         <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -153,6 +152,7 @@ const Features = () => {
         </div>
       </main>
     </div>
+    </>
   );
 }
 

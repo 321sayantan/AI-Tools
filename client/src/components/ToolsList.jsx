@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const ToolsList = () => {
     const navigate = useNavigate();
+    const handleClick = () => {
+        console.log("ToolsList clicked");
+    };
     return (
         <>
-            <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-5" style={{ display: "flex", height: "500px", minHeight: '500px', margin: '0 60px' }}>
+            <div onClick={handleClick} className=" tools-list row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-5" style={{ display: "flex", height: "500px", minHeight: '500px', margin: '0 60px' }}>
 
                 <div className="col" onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
                     <div

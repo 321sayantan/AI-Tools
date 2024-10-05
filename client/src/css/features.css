@@ -30,6 +30,7 @@ h1,h2,h3,h4{
 }
 
 .features{
-  /* overflow: auto; */
+  position: relative;
   align-items: flex-start;
+  z-index: 150;
 }
