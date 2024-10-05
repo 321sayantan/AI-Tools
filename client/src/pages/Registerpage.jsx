@@ -16,25 +16,30 @@ import {
 const Register = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
+  // Media query
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
+  // States
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  //register ctrl
+  // Register controller
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/api/v1/auth/register", { username, email, password });
-      toast.success("User Register Successfully");
+      toast.success("User Registered Successfully");
       navigate("/login");
     } catch (err) {
-      console.log(error);
-      if (err.response.data.error) {
-        setError(err.response.data.error);
+      console.log(err);
+      if (err.response?.data?.error) {
+        // Handle specific error messages from the server
+        if (err.response.data.error.includes("Email is already registered")) {
+          toast.error("This email is already registered."); // Display toast for already registered email
+        } else {
+          setError(err.response.data.error);
+        }
       } else if (err.message) {
         setError(err.message);
       }
@@ -43,68 +48,115 @@ const Register = () => {
       }, 5000);
     }
   };
+
   return (
-    <Box
-      width={isNotMobile ? "40%" : "80%"}
-      p={"2rem"}
-      m={"2rem auto"}
-      borderRadius={5}
-      sx={{ boxShadow: 5 }}
-      backgroundColor={theme.palette.background.alt}
-    >
-      <Collapse in={error}>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      </Collapse>
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Sign Up</Typography>
-        <TextField
-          label="username"
-          required
-          margin="normal"
-          fullWidth
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-        <TextField
-          label="email"
-          type="email"
-          required
-          margin="normal"
-          fullWidth
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <TextField
-          label="password"
-          type="password"
-          required
-          margin="normal"
-          fullWidth
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          size="large"
-          sx={{ color: "white", mt: 2 }}
-        >
-          Sign Up
-        </Button>
-        <Typography mt={2}>
-          Already have an account ? <Link to="/login">Please Login</Link>
-        </Typography>
-      </form>
-    </Box>
+    <div className="text-bg-dark h-100">
+      <Box
+        width={isNotMobile ? "40%" : "80%"}
+        p={"2rem"}
+        m={"2rem auto"}
+        borderRadius={5}
+        sx={{ boxShadow: 5 }}
+      >
+        <Collapse in={error}>
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        </Collapse>
+        <form onSubmit={handleSubmit}>
+          <Typography variant="h3" color="white">Sign Up</Typography>
+          <TextField
+            label="Username"
+            required
+            margin="normal"
+            fullWidth
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            InputLabelProps={{
+              style: { color: 'white' }, // Change label color to white
+            }}
+            sx={{
+              '& .MuiInputBase-root': {
+                color: 'white', // Change input text color to white
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change border color to white
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'lightgray', // Change border color on hover
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change border color when focused
+              },
+            }}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            required
+            margin="normal"
+            fullWidth
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            InputLabelProps={{
+              style: { color: 'white' }, // Change label color to white
+            }}
+            sx={{
+              '& .MuiInputBase-root': {
+                color: 'white', // Change input text color to white
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change border color to white
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'lightgray', // Change border color on hover
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change border color when focused
+              },
+            }}
+          />
+          <TextField
+            label="Password"
+            type="password"
+            required
+            margin="normal"
+            fullWidth
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            InputLabelProps={{
+              style: { color: 'white' }, // Change label color to white
+            }}
+            sx={{
+              '& .MuiInputBase-root': {
+                color: 'white', // Change input text color to white
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change border color to white
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'lightgray', // Change border color on hover
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change border color when focused
+              },
+            }}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            size="large"
+            sx={{ color: "white", mt: 2 }}
+          >
+            Sign Up
+          </Button>
+          <Typography mt={2} color="white">
+            Already have an account? <Link to="/login"> Login</Link>
+          </Typography>
+        </form>
+      </Box>
+    </div>
   );
 };
 

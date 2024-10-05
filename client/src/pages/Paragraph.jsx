@@ -17,14 +17,12 @@ import {
 const Paragraph = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
+
   const [text, settext] = useState("");
   const [para, setPara] = useState("");
   const [error, setError] = useState("");
 
-  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,90 +41,98 @@ const Paragraph = () => {
       }, 5000);
     }
   };
+  
   return (
-    <Box
-      width={isNotMobile ? "40%" : "80%"}
-      p={"2rem"}
-      m={"2rem auto"}
-      borderRadius={5}
-      sx={{ boxShadow: 5 }}
-      backgroundColor={theme.palette.background.alt}
-    >
-      <Collapse in={error}>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      </Collapse>
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Generate Paragraph</Typography>
+    <div className="text-bg-dark h-100 overflow-auto">
+      <Box
+        overflow={"auto"}
+        width={isNotMobile ? "40%" : "80%"}
+        p={"2rem"}
+        m={"2rem auto"}
+        borderRadius={5}
+        sx={{ boxShadow: 5 }}
+      >
+        <Collapse in={error}>
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        </Collapse>
+        <form onSubmit={handleSubmit}>
+          <Typography variant="h3">Generate Paragraph</Typography>
 
-        <TextField
-          placeholder="add your text"
-          type="text"
-          multiline={true}
-          required
-          margin="normal"
-          fullWidth
-          value={text}
-          onChange={(e) => {
-            settext(e.target.value);
-          }}
-        />
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          size="large"
-          sx={{ color: "white", mt: 2 }}
-        >
-          Generate
-        </Button>
-        <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
-        </Typography>
-      </form>
-
-      {para ? (
-        <Card
-          sx={{
-            mt: 4,
-            border: 1,
-            boxShadow: 0,
-            height: "500px",
-            borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
-          }}
-        >
-          <Typography p={2}>{para}</Typography>
-        </Card>
-      ) : (
-        <Card
-          sx={{
-            mt: 4,
-            border: 1,
-            boxShadow: 0,
-            height: "500px",
-            borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
-          }}
-        >
-          <Typography
-            variant="h5"
-            color="natural.main"
+          <TextField
+            placeholder="Add your text"
+            type="text"
+            multiline={true}
+            required
+            margin="normal"
+            fullWidth
+            value={text}
+            onChange={(e) => settext(e.target.value)}
+            InputProps={{
+              style: { color: "white" },
+            }}
             sx={{
-              textAlign: "center",
-              verticalAlign: "middel",
-              lineHeight: "450px",
+              input: { color: "white" },
+              "& .MuiInputBase-input::placeholder": { color: "white" },
+            }}
+          />
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            size="large"
+            sx={{ color: "white", mt: 2 }}
+          >
+            Generate
+          </Button>
+          <Typography mt={2}>
+            Not this tool? <Link to="/">GO BACK</Link>
+          </Typography>
+        </form>
+
+        {para ? (
+          <Card
+            className="text-bg-dark"
+            sx={{
+              mt: 4,
+              border: 1,
+              boxShadow: 0,
+              height: "500px",
+              borderRadius: 5,
+              color: "white",
             }}
           >
-            Your Paragraph Will Apprea Here
-          </Typography>
-        </Card>
-      )}
-    </Box>
+            <Typography p={2}>{para}</Typography>
+          </Card>
+        ) : (
+          <Card
+            className="text-bg-dark"
+            sx={{
+              mt: 4,
+              border: 1,
+              boxShadow: 0,
+              height: "500px",
+              borderRadius: 5,
+              color: "white",
+            }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                textAlign: "center",
+                verticalAlign: "middle",
+                lineHeight: "450px",
+                color: "rgba(255, 255, 255, 0.6) !important",
+              }}
+            >
+              Your Paragraph Will Appear Here!
+            </Typography>
+          </Card>
+        )}
+      </Box>
+    </div>
   );
 };
 
