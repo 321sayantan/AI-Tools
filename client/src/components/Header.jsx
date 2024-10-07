@@ -3,7 +3,6 @@ import React from 'react'
 const Header = () => {
     return (
         <>
-        
             <div id="myCarousel" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" className="" aria-label="Slide 1"></button>

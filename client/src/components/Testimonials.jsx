@@ -3,8 +3,7 @@ import React from 'react'
 const Testimonials = () => {
   return (
     <section
-      className="text-bg-dark"
-      style={{ color: "#000", backgroundColor: "#f3f2f2" }}
+      className=" back"
     >
       <div className="container py-5">
         <div className="row d-flex justify-content-center">
