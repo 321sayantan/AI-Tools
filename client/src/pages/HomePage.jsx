@@ -12,10 +12,10 @@ const Homepage = () => {
   return (
     <>
       <Header />
-      <Features />
-      <ToolsList />
-      <Testimonials />
-      <Footer />
+        <Features />
+        <ToolsList />
+        <Testimonials />
+        <Footer />
     </>
   );
 };
