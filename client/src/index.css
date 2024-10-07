@@ -1,5 +1,4 @@
 
-
 * {
   margin: 0;
   padding: 0;
@@ -45,8 +44,6 @@ html, body {
   }
 }
 
-
-
 body {
   overflow: auto; 
 }
@@ -80,10 +77,6 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;     /* Color when hovering over the scrollbar thumb */
 }
-
-/* Ensure ToolsList has a higher z-index */
-.tools-list {
-  position: relative; /* Ensure it is positioned relative to the parent */
-  z-index: 100; /* Set a higher z-index */
+.back{
+  background-color: #121212;
 }
-
