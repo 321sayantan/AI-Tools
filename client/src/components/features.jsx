@@ -1,11 +1,10 @@
 import React from 'react'
 import "../css/features.css"
-// import "../assets/bootstrap.min.css"
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 const Features = () => {
   return (
-    <div className="features text-start">
+    <>
+    <div className="features text-start ">
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
         <symbol id="bootstrap" viewBox="0 0 118 94">
           <title>Bootstrap</title>
@@ -78,81 +77,77 @@ const Features = () => {
         </symbol>
       </svg>
       <main>
-        <div className="b-example-divider" />
-        <div className="container px-4 py-5">
-          <h2 className="pb-2 border-bottom">
-            Features
-          </h2>
-          <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
-            <div className="col d-flex flex-column align-items-start gap-2">
-              <h2 className="fw-bold">
-                Left-aligned title explaining these awesome features
-              </h2>
-              <p className="">
-                Paragraph of text beneath the heading to explain the heading.
-                We'll add onto it with another sentence and probably just keep
-                going until we run out of words.
-              </p>
-              <a href="#" className="btn btn-primary btn-lg">
-                Primary button
-              </a>
+  <div className="b-example-divider" />
+  <div className="container px-4 py-5">
+    <h2 className="pb-2 border-bottom">
+    Elevate Your Productivity with AI Tools
+    </h2>
+    <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+      <div className="col d-flex flex-column align-items-start gap-2">
+        <h2 className="fw-bold">
+          AI-Powered Tools for Productivity
+        </h2>
+        <p className="">
+          TOOL-E brings together five AI tools to boost productivity, offering everything you need in one platform.
+        </p>
+        <a href="#" className="btn btn-primary btn-lg">
+          Explore TOOL-E
+        </a>
+      </div>
+      <div className="col">
+        <div className="row row-cols-1 row-cols-sm-2 g-4">
+          <div className="col d-flex flex-column gap-2">
+            <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+              <svg className="bi" width="1em" height="1em">
+                <use xlinkHref="#collection" />
+              </svg>
             </div>
-            <div className="col">
-              <div className="row row-cols-1 row-cols-sm-2 g-4">
-                <div className="col d-flex flex-column gap-2">
-                  <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                    <svg className="bi" width="1em" height="1em">
-                      <use xlinkHref="#collection" />
-                    </svg>
-                  </div>
-                  <h4 className="fw-semibold mb-0">Featured title1</h4>
-                  <p className="">
-                    Paragraph of text beneath the heading to explain the
-                    heading.
-                  </p>
-                </div>
-                <div className="col d-flex flex-column gap-2">
-                  <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                    <svg className="bi" width="1em" height="1em">
-                      <use xlinkHref="#gear-fill" />
-                    </svg>
-                  </div>
-                  <h4 className="fw-semibold mb-0">Featured title2</h4>
-                  <p className="">
-                    Paragraph of text beneath the heading to explain the
-                    heading.
-                  </p>
-                </div>
-                <div className="col d-flex flex-column gap-2">
-                  <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                    <svg className="bi" width="1em" height="1em">
-                      <use xlinkHref="#speedometer" />
-                    </svg>
-                  </div>
-                  <h4 className="fw-semibold mb-0 ">Featured title3</h4>
-                  <p className="">
-                    Paragraph of text beneath the heading to explain the
-                    heading.
-                  </p>
-                </div>
-                <div className="col d-flex flex-column gap-2">
-                  <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                    <svg className="bi" width="1em" height="1em">
-                      <use xlinkHref="#table" />
-                    </svg>
-                  </div>
-                  <h4 className="fw-semibold mb-0 ">Featured title4</h4>
-                  <p className="">
-                    Paragraph of text beneath the heading to explain the
-                    heading.
-                  </p>
-                </div>
-              </div>
+            <h4 className="fw-semibold mb-0">AI Text Generator</h4>
+            <p className="">
+              Create high-quality text quickly for any task.
+            </p>
+          </div>
+          <div className="col d-flex flex-column gap-2">
+            <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+              <svg className="bi" width="1em" height="1em">
+                <use xlinkHref="#gear-fill" />
+              </svg>
             </div>
+            <h4 className="fw-semibold mb-0">AI Image Creator</h4>
+            <p className="">
+              Generate images from prompts with ease.
+            </p>
+          </div>
+          <div className="col d-flex flex-column gap-2">
+            <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+              <svg className="bi" width="1em" height="1em">
+                <use xlinkHref="#speedometer" />
+              </svg>
+            </div>
+            <h4 className="fw-semibold mb-0 ">AI Summarizer</h4>
+            <p className="">
+              Get quick, clear summaries of any text.
+            </p>
+          </div>
+          <div className="col d-flex flex-column gap-2">
+            <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+              <svg className="bi" width="1em" height="1em">
+                <use xlinkHref="#table" />
+              </svg>
+            </div>
+            <h4 className="fw-semibold mb-0 ">AI Code Assistant</h4>
+            <p className="">
+            Convert prompts into JavaScript code instantly for faster development.
+            </p>
           </div>
         </div>
-      </main>
+      </div>
     </div>
+  </div>
+</main>
+
+    </div>
+    </>
   );
 }
 
