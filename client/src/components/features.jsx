@@ -1,11 +1,10 @@
 import React from 'react'
 import "../css/features.css"
-// import "../assets/bootstrap.min.css"
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 const Features = () => {
   return (
-    <div className="features text-start">
+    <>
+    <div className="features text-start ">
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
         <symbol id="bootstrap" viewBox="0 0 118 94">
           <title>Bootstrap</title>
@@ -81,7 +80,7 @@ const Features = () => {
         <div className="b-example-divider" />
         <div className="container px-4 py-5">
           <h2 className="pb-2 border-bottom">
-            Features with title0
+            Features with title
           </h2>
           <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
             <div className="col d-flex flex-column align-items-start gap-2">
@@ -153,6 +152,7 @@ const Features = () => {
         </div>
       </main>
     </div>
+    </>
   );
 }
 

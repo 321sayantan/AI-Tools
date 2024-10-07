@@ -3,12 +3,10 @@ import React from "react";
 const Footer = () => {
   return (
     <div
-      className="container"
+      className="container custom-bg-dark"
       style={{
         minWidth: "100%",
         padding: "0px 50px",
-        background:
-          "linear-gradient(0deg, rgba(36,36,36,1) 0%, rgba(15,15,15,1) 100%)",
       }}
     >
       <footer className="py-5 pb-0 text-body-white">
