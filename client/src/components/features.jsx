@@ -81,7 +81,7 @@ const Features = () => {
         <div className="b-example-divider" />
         <div className="container px-4 py-5">
           <h2 className="pb-2 border-bottom">
-            Features with title0
+            Features
           </h2>
           <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
             <div className="col d-flex flex-column align-items-start gap-2">
