@@ -31,7 +31,7 @@ const Header = () => {
           <div className="carousel-inner">
             <div className="carousel-item">
               <img
-                src="/images/24.jpg"
+                src="/images/80.jpeg"
                 alt="First slide"
                 className="carousel-image"
               />

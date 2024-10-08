@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <hr className="back m-0 p-0 w-11/12 m-auto"></hr>
+      <hr className="back p-0 w-11/12 m-auto"></hr>
       <footer className="back">
         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div className="md:flex md:justify-between">
