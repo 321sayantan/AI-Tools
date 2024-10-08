@@ -9,7 +9,7 @@ import Summary from "./pages/Summary";
 import Paragraph from "./pages/Paragraph";
 import ScifiImage from "./pages/ScifiImage";
 import ChatBot from "./pages/ChatBot";
-import JsConverter from "./pages/JsConverter";
+import JsConverter from "./pages/JsConverter"
 
 
 
