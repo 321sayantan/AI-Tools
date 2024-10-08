@@ -32,8 +32,3 @@ h1,h2,h3,h4{
 .back{
   background-color: #121212;
 }
-.features{
-  position: relative;
-  align-items: flex-start;
-  z-index: 150;
-}
