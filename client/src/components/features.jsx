@@ -4,7 +4,7 @@ import "../css/features.css"
 const Features = () => {
   return (
     <>
-      <div className=" back features text-start ">
+      <div id="feature-section" className=" back features text-start ">
         <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
           <symbol id="bootstrap" viewBox="0 0 118 94">
             <title>Bootstrap</title>
@@ -89,7 +89,10 @@ const Features = () => {
                   TOOL-E brings together five AI tools to boost productivity,
                   offering everything you need in one platform.
                 </p>
-                <a href="#" className="btn btn-primary btn-lg">
+                <a href="#"  onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById('tools-list').scrollIntoView({ behavior: 'smooth' });
+                    }} className="btn btn-primary btn-lg">
                   Explore TOOL-E
                 </a>
               </div>
