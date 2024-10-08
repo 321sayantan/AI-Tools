@@ -8,15 +8,16 @@ const Testimonials = () => {
           <div className="col-md-10 col-xl-8 text-center">
             <h3 className="fw-bold mb-4 display-5">Testimonials</h3>
             <p className="mb-4 pb-2 mb-md-5 pb-md-0 lead">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
-              error amet numquam iure provident voluptate esse quasi, veritatis
-              totam voluptas nostrum quisquam eum porro a pariatur veniam.
+              See what our users are saying! Our cutting-edge AI tools have
+              transformed workflows, enhanced efficiency, and delivered tangible
+              results. Read the stories of how we've empowered businesses and
+              individuals to achieve more.
             </p>
           </div>
         </div>
         <div className="row text-center">
           <div className="col-md-4 mb-4 mb-md-0">
-            <div className="card text-bg-dark border">
+            <div className="card text-bg-dark border min-h-full">
               <div className="card-body py-4 mt-2 ">
                 <div className="d-flex justify-content-center mb-4">
                   <img
@@ -26,8 +27,10 @@ const Testimonials = () => {
                     height={100}
                   />
                 </div>
-                <h5 className="font-weight-bold">Teresa May</h5>
-                <h6 className="font-weight-bold my-3">Founder at ET Company</h6>
+                <h5 className="font-weight-bold">Sarah Martinez</h5>
+                <h6 className="font-weight-bold my-3">
+                  Digital Marketing Specialist
+                </h6>
                 <ul className="list-unstyled d-flex justify-content-center">
                   <li>
                     <i className="fas fa-star fa-sm text-info" />
@@ -47,16 +50,17 @@ const Testimonials = () => {
                 </ul>
                 <p className="mb-2">
                   <i className="fas fa-quote-left pe-2" />
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                  eos id officiis hic tenetur quae quaerat ad velit ab hic
-                  tenetur.
+                  TOOL-E has been a game-changer for our marketing campaigns!
+                  The AI tools help us automate complex tasks, saving countless
+                  hours while delivering accurate insights. It’s like having an
+                  extra team member with top-notch problem-solving skills!
                 </p>
               </div>
             </div>
           </div>
 
           <div className="col-md-4 mb-4 mb-md-0">
-            <div className="card text-bg-dark border">
+            <div className="card text-bg-dark border min-h-full">
               <div className="card-body py-4 mt-2">
                 <div className="d-flex justify-content-center mb-4">
                   <img
@@ -67,9 +71,7 @@ const Testimonials = () => {
                   />
                 </div>
                 <h5 className="font-weight-bold">Maggie McLoan</h5>
-                <h6 className="font-weight-bold my-3">
-                  Photographer at Studio LA
-                </h6>
+                <h6 className="font-weight-bold my-3">Software Engineer</h6>
                 <ul className="list-unstyled d-flex justify-content-center">
                   <li>
                     <i className="fas fa-star fa-sm text-info" />
@@ -89,16 +91,18 @@ const Testimonials = () => {
                 </ul>
                 <p className="mb-2">
                   <i className="fas fa-quote-left pe-2" />
-                  Autem, totam debitis suscipit saepe sapiente magnam officiis
-                  quaerat necessitatibus odio assumenda perferendis labore
-                  laboriosam.
+                  As a developer, I’ve tried numerous AI tools, but TOOL-E
+                  stands out for its user-friendly interface and advanced
+                  capabilities. It easily integrates into our workflow and
+                  consistently delivers high-quality results. This platform is a
+                  must-have for any tech professional!
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="col-md-4 mb-0">
-            <div className="card text-bg-dark border">
+          <div className="col-md-4 mb-0 ">
+            <div className="card text-bg-dark border min-h-full">
               <div className="card-body py-4 mt-2">
                 <div className="d-flex justify-content-center mb-4">
                   <img
@@ -108,9 +112,9 @@ const Testimonials = () => {
                     height={100}
                   />
                 </div>
-                <h5 className="font-weight-bold">Alexa Horwitz</h5>
+                <h5 className="font-weight-bold">Emily Thompson</h5>
                 <h6 className="font-weight-bold my-3">
-                  Front-end Developer in NY
+                  CEO, Bright Ideas Consulting
                 </h6>
                 <ul className="list-unstyled d-flex justify-content-center">
                   <li>
@@ -131,9 +135,11 @@ const Testimonials = () => {
                 </ul>
                 <p className="mb-2">
                   <i className="fas fa-quote-left pe-2" />
-                  Cras sit amet nibh libero, in gravida nulla metus scelerisque
-                  ante sollicitudin commodo cras purus odio, vestibulum in
-                  tempus viverra turpis.
+                  TOOL-E’s AI solutions have streamlined our operations in ways
+                  we didn’t think possible. From data analysis to automating
+                  routine tasks, it’s helped our team focus on what really
+                  matters—delivering value to our clients. Highly recommended
+                  for businesses of all sizes!
                 </p>
               </div>
             </div>
