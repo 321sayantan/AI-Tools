@@ -118,6 +118,7 @@ const Summary = () => {
         <Card
         className="text-bg-dark" 
           sx={{
+            textAlign: "right",
             mt: 4,
             border: 1,
             boxShadow: 0,

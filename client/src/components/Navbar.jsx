@@ -4,6 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "../css/navbar.css";
 import "bootstrap";
+import Features from './features';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -34,20 +35,34 @@ const Navbar = () => {
         <div className="container custom-margin">
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-              <svg className="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                <use xlinkHref="#bootstrap"></use>
-              </svg>
+              <div className="flex items-center">
+                <img
+                  src="/images/logo.png"
+                  className="h-8 me-3 rounded-full bg-white p-0.5"
+                  alt="Tool-E Logo"
+                />
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                  TOOL-E
+                </span>
+              </ div>
             </a>
 
             <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
               <li>
-                <NavLink to="/" className="nav-link px-2 text-secondary">Home</NavLink>
+                <NavLink to="/faqs" className="nav-link px-2 text-secondary"></NavLink>
               </li>
               <li>
-                <NavLink to="/faqs" className="nav-link px-2 text-white">FAQs</NavLink>
-              </li>
-              <li>
-                <NavLink to="/about" className="nav-link px-2 text-white">About</NavLink>
+                <NavLink
+                  to="#"
+                  className="nav-link px-2 text-secondary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('feature-section').scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Features
+                </NavLink>
               </li>
             </ul>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -14,15 +14,25 @@ import {
 } from "@mui/material";
 
 const Register = () => {
+
   const theme = useTheme();
   const navigate = useNavigate();
-  // Media query
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // States
+ 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const toastShownRef = useRef(false); 
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken"); // Check for the token
+    if (token && !toastShownRef.current) {
+      toast.error("You are already logged in!"); 
+      toastShownRef.current = true;// Display toast for already logged in user
+      navigate("/");
+    }
+  }, [navigate]);
 
   // Register controller
   const handleSubmit = async (e) => {
