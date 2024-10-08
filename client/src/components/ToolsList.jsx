@@ -7,7 +7,7 @@ const ToolsList = () => {
     const navigate = useNavigate();
     return (
         <>
-        <div className=" back toolslist" >
+        <div id="tools-list" className=" back toolslist" >
         <Heading />
             <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-0" style={{ display: "flex", height: "500px", minHeight: '500px', margin: '0 60px' }}>
 
