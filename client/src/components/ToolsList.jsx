@@ -11,7 +11,7 @@ const ToolsList = () => {
         <Heading />
             <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-0" style={{ display: "flex", height: "500px", minHeight: '500px', margin: '0 60px' }}>
 
-                <div className="col" onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
+                <div className="col cardstyle " onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
                     <div
                         className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
                         style={{
@@ -30,7 +30,7 @@ const ToolsList = () => {
                     </div>
                 </div>
 
-                <div className="col" onClick={() => navigate("/paragraph")} style={{ cursor: "pointer" }}>
+                <div className="col cardstyle " onClick={() => navigate("/paragraph")} style={{ cursor: "pointer" }}>
                     <div
                         className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
                         style={{
@@ -49,7 +49,7 @@ const ToolsList = () => {
                     </div>
                 </div>
 
-                <div className="col" onClick={() => navigate("/chatbot")} style={{ cursor: "pointer" }}>
+                <div className="col cardstyle " onClick={() => navigate("/chatbot")} style={{ cursor: "pointer" }}>
                     <div
                         className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
                         style={{
@@ -68,7 +68,7 @@ const ToolsList = () => {
                     </div>
                 </div>
 
-                <div className="col" onClick={() => navigate("/js-converter")} style={{ cursor: "pointer" }}>
+                <div className="col cardstyle " onClick={() => navigate("/js-converter")} style={{ cursor: "pointer" }}>
                     <div
                         className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
                         style={{
@@ -88,7 +88,7 @@ const ToolsList = () => {
                     </div>
                 </div>
 
-                <div className="col" onClick={() => navigate("/scifi-image")} style={{ cursor: "pointer" }}>
+                <div className="col cardstyle " onClick={() => navigate("/scifi-image")} style={{ cursor: "pointer" }}>
                     <div
                         className="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
                         style={{
