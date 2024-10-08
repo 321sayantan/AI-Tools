@@ -73,7 +73,7 @@ const Header = () => {
             </div>
             <div className="carousel-item">
               <img
-                src="\images\39.jpg"
+                src="\images\39.jpeg"
                 alt="Third slide"
                 className="carousel-image"
               />

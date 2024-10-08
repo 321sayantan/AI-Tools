@@ -83,5 +83,6 @@ body {
 
 .cardstyle:hover{
   transform: scale(1.1);
-  transition-duration: 0.25s;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
 }
