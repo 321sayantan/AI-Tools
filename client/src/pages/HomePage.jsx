@@ -8,7 +8,7 @@ import Footer from "../components/footer";
 const Homepage = () => {
   return (
     <>
-      <Header />
+        <Header />
         <Features />
         <ToolsList />
         <Testimonials />
