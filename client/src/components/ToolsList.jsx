@@ -114,4 +114,4 @@ const ToolsList = () => {
     )
 }
 
-export default React.memo(ToolsList);
+export default ToolsList;

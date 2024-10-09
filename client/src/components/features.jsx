@@ -149,4 +149,4 @@ const Features = () => {
   );
 }
 
-export default React.memo(Features);
+export default Features;

@@ -150,4 +150,4 @@ const Testimonials = () => {
   );
 }
 
-export default React.memo(Testimonials);
+export default Testimonials;
