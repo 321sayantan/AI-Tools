@@ -6,7 +6,10 @@ import FormData from "form-data";
 import path from 'path'; 
 import { v4 as uuidv4 } from 'uuid';
 
+
 dotenv.config();
+
+
 
 export const summaryController = async (req, res) => {
   try {
@@ -130,6 +133,29 @@ export const jsconverterController = async(req, res) => {
 };
 
 
+
 export const chatbotController = async(req, res) => {
-  res.json({ message: "Chatbot Controller Dummy Response" });
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const { text } = req.body;
+
+const chat = model.startChat({
+  history: [
+    {
+      role: "user",
+      parts: [{ text: "Hello" }],
+    },
+    {
+      role: "model",
+      parts: [{ text: "Great to meet you. What would you like to know?" }],
+    },
+  ],
+});
+
+let result = await chat.sendMessage(text);
+return res.status(200).json(result.response.text());
+console.log(result.response.text());
+
+
+
 };
