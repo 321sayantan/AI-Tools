@@ -77,6 +77,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;     /* Color when hovering over the scrollbar thumb */
 }
+
 .back{
   background-color: #121212;
 }
