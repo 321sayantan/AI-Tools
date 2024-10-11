@@ -1,7 +1,5 @@
 # TOOL-E: AI-Powered Productivity Platform
 
-![TOOL-E Logo](link-to-your-logo-image) <!-- Optional: Add a logo if you have one -->
-
 ## Overview
 TOOL-E is an innovative platform that integrates five dynamic AI tools designed to simplify and enhance your productivity and creativity. Whether you need to generate code, summarize text, or create stunning visuals, TOOL-E has you covered!
 
