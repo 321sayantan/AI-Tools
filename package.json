@@ -27,6 +27,7 @@
     "express": "^4.21.0",
     "form-data": "^4.0.0",
     "jsonwebtoken": "^9.0.2",
+    "marked": "^14.1.2",
     "mongoose": "^8.6.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.4",

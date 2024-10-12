@@ -5,7 +5,16 @@ import errorResponse from "../utils/errorResponse.js";
 // JWT TOKEN
 export const sendToken = (user, statusCode, res) => {
   const token = user.getSignedToken(res);
+  // console.log(user)
   console.log(token)
+
+    // res.cookie("token", token.accessToken, {
+    //   // httpOnly: true, // Makes the cookie inaccessible to JavaScript on the frontend
+    //   // secure: true, // Ensure cookies are sent only over HTTPS (for production)
+    //   maxAge: 3600000, // Expiry in milliseconds (1 hour here)
+    //   // sameSite: "Strict", // Cookie is sent only to first-party requests
+    // });
+
   res.status(statusCode).json({
     success: true,
     token,

@@ -8,7 +8,7 @@ import Features from './features';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  const loggedIn = localStorage.getItem("authToken");
 
   const handleLogout = async () => {
     try {

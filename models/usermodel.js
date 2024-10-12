@@ -3,6 +3,15 @@ import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 import cookie from "cookie";
 
+const chatHistorySchema = new mongoose.Schema({
+  role: { type: String, required: true }, // Ensure this matches your data structure
+  parts: [
+    {
+      text: { type: String, required: true }, // Check if this is the right type
+    },
+  ],
+});
+
 // User Schema
 const userSchema = new mongoose.Schema({
   username: {
@@ -19,6 +28,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required"],
     minlength: [6, "Password length should be 6 characters long"],
   },
+  ChatBotHistory: [chatHistorySchema],
   customerId: {
     type: String,
     default: "",
@@ -50,22 +60,22 @@ userSchema.methods.getSignedToken = function (res) {
   const accessToken = JWT.sign(
     { id: this._id },
     process.env.JWT_ACCESS_SECRET,
-    { expiresIn: parseInt(process.env.JWT_ACCESS_EXPIREIN) || '15m' }  // Default to 15 minutes
+    { expiresIn: "15d" } // Default to 15 minutes   parseInt(process.env.JWT_ACCESS_EXPIREIN) ||
   );
-  
+
   // Generate refresh token
   const refreshToken = JWT.sign(
     { id: this._id },
     process.env.JWT_REFRESH_TOKEN,
-    { expiresIn: parseInt(process.env.JWT_REFRESH_EXPIREIN) || '15d' }  // Default to 15 days
+    { expiresIn: parseInt(process.env.JWT_REFRESH_EXPIREIN) || "15d" } // Default to 15 days
   );
 
   // Set refresh token as cookie
   res.cookie("refreshToken", refreshToken, {
     maxAge: 86400 * 15 * 1000, // 15 days in milliseconds
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',  // Only send cookie over HTTPS in production
-    sameSite: 'strict',
+    secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS in production
+    sameSite: "strict",
   });
 
   return { accessToken, refreshToken };

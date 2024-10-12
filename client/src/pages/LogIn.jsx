@@ -28,7 +28,7 @@ const LogIn = () => {
       const { data } = await axios.post("http://localhost:5000/api/v1/auth/LogIn", { email, password });
       console.log(1, data.token.accessToken);
       if (data.token.accessToken) {
-        localStorage.setItem("authToken", true);
+        localStorage.setItem("authToken", data.token.accessToken);
         toast.success("LogIn Successful");
         navigate("/");
       }

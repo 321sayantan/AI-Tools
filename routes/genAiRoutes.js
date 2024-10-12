@@ -6,13 +6,14 @@ import {
   jsconverterController,
   scifiImageController,
 } from "../controllers/genAiController.js"; 
+import verifyToken from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
 
 router.post("/summary", summaryController);
 router.post("/paragraph", paragraphController);
-router.post("/chatbot", chatbotController);
+router.post("/chatbot",verifyToken, chatbotController);
 router.post("/js-converter", jsconverterController);
 router.post("/scifi-image", scifiImageController);
 
