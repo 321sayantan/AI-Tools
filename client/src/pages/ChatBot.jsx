@@ -7,7 +7,24 @@ const ChatBot = () => {
   const [chatHistory, setChatHistory] = useState(
     JSON.parse(sessionStorage.getItem("chatHistory")) || []
   );
-  const chatContainerRef = useRef(null); 
+  const chatContainerRef = useRef(null);
+
+  // update history
+  const previousHistory = async () => {
+    const jwt = localStorage.getItem("authToken");
+    const { data } = await axios.get(
+      "http://localhost:5000/api/v1/genAi/updateHistory",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    console.log(data);
+    sessionStorage.setItem("chatHistory", JSON.stringify(data));
+    setChatHistory(data);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,31 +32,32 @@ const ChatBot = () => {
     // Add user input to history
     const newChatHistory = [
       ...chatHistory,
-      { role: "user", parts: [{ text: text }] }];
+      { role: "user", parts: [{ text: text }] },
+    ];
     sessionStorage.setItem("chatHistory", JSON.stringify(newChatHistory));
-    setChatHistory(newChatHistory); 
+    setChatHistory(newChatHistory);
     console.log(newChatHistory);
 
     try {
       const jwt = localStorage.getItem("authToken");
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/genAi/chatbot",
-         { text, chatHistory },
+        { text },
         {
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${jwt}`,
           },
-        },
+        }
       );
-      
+
       const res = marked.parse(data);
 
       // Add bot response to history
       const updatedChatHistory = [
         ...newChatHistory,
         // { role: "bot", text: res },
-        { role: "model", parts: [{text: res}] },
+        { role: "model", parts: [{ text: res }] },
       ];
       sessionStorage.setItem("chatHistory", JSON.stringify(updatedChatHistory));
       setChatHistory(updatedChatHistory); // Update the state
@@ -54,13 +72,24 @@ const ChatBot = () => {
   // Scroll to bottom whenever chatHistory changes
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [chatHistory]);
 
+  useEffect(() => {
+    // console.log(21, chatHistory)
+    if (chatHistory.length == 0) previousHistory();
+  }, []);
+
   return (
     <div className="overflow-hidden">
-      <h1 className="mb-4 mt-2">AI ChatBot</h1>
+      <div className="flex justify-center">
+        <h1 className="mb-4 mt-2">AI ChatBot</h1>
+        <div className="absolute w-80">
+          <button className="">Clear Chat</button>
+        </div>
+      </div>
       <div
         style={{
           boxShadow: "0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05)",

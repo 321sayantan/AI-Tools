@@ -173,5 +173,28 @@ export const chatbotController = async (req, res) => {
         }
       }
     });
-  } catch (err) {}
+  } catch (err) {
+    console.log(err)
+  }
+};
+
+export const updateHistory = async (req, res) => {
+  try {
+    jwt.verify(req.token, process.env.JWT_ACCESS_SECRET, async (err, data) => {
+      if (data === undefined) {
+        console.log("token expired");
+        res.status(200).json({ message: "Login Session Expired" });
+      } else {
+        const user = await User.findOne({ _id: data.id });
+        if (!user) {
+          console.log("user not found");
+          res.status(400).json("Invalid User");
+        } else {
+          return res.status(200).json(user.ChatBotHistory);
+        }
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
