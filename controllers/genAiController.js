@@ -219,7 +219,9 @@ export const clearHistory = async (req, res) => {
         $set: { ChatBotHistory: [] },
       });
 
-      return res.status(200).json("Chat History Cleared, default messages retained");
+      return res
+        .status(200)
+        .json("Chat History Cleared, default messages retained");
     });
   } catch (error) {
     console.log("Error while clearing chat history:", error);

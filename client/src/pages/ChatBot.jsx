@@ -25,15 +25,16 @@ const ChatBot = () => {
           },
         }
       );
-      sessionStorage.setItem("chatHistory", JSON.stringify(data));
+      // sessionStorage.setItem("chatHistory", JSON.stringify(data));
       setChatHistory(data.length > 0 ? data : [
-        { role: "model", parts: [{ text: "Hi there! I'm your friendly chatbot, here to assist you. How can I help?" }] }
+        // { role: "model", parts: [{ text: "Hi there! I'm your friendly chatbot, here to assist you. How can I help?" }] }
       ]);
     } catch (error) {
       console.error("Error fetching chat history:", error);
       setChatHistory([{ role: "model", parts: [{ text: "Hi there! I'm your friendly chatbot, here to assist you. How can I help?" }] }]);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,7 +56,7 @@ const ChatBot = () => {
         userMessage,
       ];
 
-    sessionStorage.setItem("chatHistory", JSON.stringify(newChatHistory));
+    // sessionStorage.setItem("chatHistory", JSON.stringify(newChatHistory));
     setChatHistory(newChatHistory);
     console.log(newChatHistory);
 
@@ -78,7 +79,7 @@ const ChatBot = () => {
         ...newChatHistory,
         { role: "model", parts: [{ text: res }] },
       ];
-      sessionStorage.setItem("chatHistory", JSON.stringify(updatedChatHistory));
+      // sessionStorage.setItem("chatHistory", JSON.stringify(updatedChatHistory));
       setChatHistory(updatedChatHistory); // Update the state
 
       // Clear input field
@@ -111,7 +112,7 @@ const ChatBot = () => {
 
       // Clear the chat history in state and session storage
       setChatHistory([]); // Reset local chat history state
-      sessionStorage.removeItem("chatHistory"); // Clear session storage
+      // sessionStorage.removeItem("chatHistory"); // Clear session storage
       toast.success("Chat history cleared!");
     } catch (error) {
       console.error("Error clearing chat history:", error);
@@ -129,7 +130,8 @@ const ChatBot = () => {
 
   // Fetch chat history on component mount
   useEffect(() => {
-    fetchChatHistory(); // Fetch chat history from the backend
+    if(chatHistory.length == 0)
+      fetchChatHistory(); // Fetch chat history from the backend
   }, []);
 
   return (
@@ -157,7 +159,7 @@ const ChatBot = () => {
             </div>
 
 
-            <h1 className="text-center">𝙰𝙸 𝙲𝚑𝚊𝚝𝙱𝚘𝚝 </h1>
+            <h1 className="text-center ml-3">𝙰𝙸 𝙲𝚑𝚊𝚝𝙱𝚘𝚝 </h1>
 
             <div
               className="ml-auto cursor-pointer" // Add cursor pointer to indicate it's clickable
@@ -178,31 +180,13 @@ const ChatBot = () => {
           className="m-auto max-h-[77%] overflow-hidden bg-dark p-0 rounded-lg border border-[#e5e7eb] w-4/5 h-auto"
         >
           <div
-            className="overflow-auto h-[550px] pt-4 pb-4 ml-5"
+            className="overflow-auto h-[510px] pt-4 pb-4 ml-5"
             ref={chatContainerRef}
             style={{ padding: 0, margin: 0 }}
           >
 
-            <div className="flex ml-2 text-left flex-row mb-4">
-              <img
-                src="/images/logo.png"
-                className="h-8 me-0.1 mr-2 rounded-full bg-white p-0.5"
-                alt="Tool-E Logo"
-              />
-              <div
-                className={`p-3 me-3`}
-                style={{
-                  borderRadius: 15,
-                  backgroundColor: "rgba(0, 0, 0, .2)",
-                }}
-              >
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: marked("Hi there! I'm your friendly chatbot, here to assist you. How can I help?"), // Default message
-                  }}
-                />
-              </div>
-            </div>
+            
+
             {chatHistory.length > 0 ? (
               chatHistory.map((message, index) => (
                 <div
@@ -238,7 +222,7 @@ const ChatBot = () => {
                         alt="Tool-E Logo"
                       />
                       <div
-                        className={`p-3 me-3 max-w-4xl`}
+                        className={`p-3 me-3 max-w-3xl`}
                         style={{
                           borderRadius: 15,
                           backgroundColor: "rgba(0, 0, 0, .2)",
@@ -302,3 +286,27 @@ const ChatBot = () => {
 };
 
 export default ChatBot;
+
+
+/**<div className="flex ml-2 text-left flex-row mb-4">
+  <img
+    src="/images/logo.png"
+    className="h-8 me-0.1 mr-2 rounded-full bg-white p-0.5"
+    alt="Tool-E Logo"
+  />
+  <div
+    className={`p-3 me-3`}
+    style={{
+      borderRadius: 15,
+      backgroundColor: "rgba(0, 0, 0, .2)",
+    }}
+  >
+    <div
+      dangerouslySetInnerHTML={{
+        __html: marked(
+          "Hi there! I'm your friendly chatbot, here to assist you. How can I help?"
+        ), // Default message
+      }}
+    />
+  </div>
+</div> **/

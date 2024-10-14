@@ -108,8 +108,8 @@ const ScifiImage = () => {
               overflow: "auto",
             }}
           >
-            <Box sx={{ display: "flex", justifyContent: "center", my: 5 }}>
-              <img src={image} alt="scifiimage" style={{ maxWidth: "100%" }} />
+            <Box className="overflow-hidden h-[100%]" >
+              <img src={image} alt="scifiimage" className="" style={{}} />
             </Box>
           </Card>
         ) : (
@@ -143,3 +143,4 @@ const ScifiImage = () => {
 };
 
 export default ScifiImage;
+// sx={{ display: "flex", justifyContent: "center", my: 0 }}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { marked } from "marked";
 import axios from "axios";
 import {
   Box,
@@ -29,8 +30,9 @@ const JsConverter = () => {
       const { data } = await axios.post("http://localhost:5000/api/v1/genAi/js-converter", {
         text,
       });
-      console.log(data);
-      setCode(data);
+      // console.log(data);
+      const res = marked.parse(data);
+      setCode(res);
     } catch (err) {
       console.log(error);
       if (err.response.data.error) {
@@ -96,7 +98,7 @@ const JsConverter = () => {
 
         {code ? (
           <Card
-            className="text-bg-dark"
+            className="text-bg-dark text-left p-2"
             sx={{
               mt: 4,
               border: 1,
@@ -107,9 +109,15 @@ const JsConverter = () => {
               overflow: "auto",
             }}
           >
-            <pre>
-              <Typography p={2}>{code}</Typography>
-            </pre>
+            {/* <pre> */}
+              {/* <Typography p={2}> */}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: marked(code),
+                  }}
+                />
+              {/* </Typography> */}
+            {/* </pre> */}
           </Card>
         ) : (
           <Card

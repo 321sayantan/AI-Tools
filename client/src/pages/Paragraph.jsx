@@ -94,7 +94,7 @@ const Paragraph = () => {
 
         {para ? (
           <Card
-            className="text-bg-dark"
+            className="text-bg-dark text-left"
             sx={{
               mt: 4,
               border: 1,
