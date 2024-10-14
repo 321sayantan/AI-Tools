@@ -1,46 +1,65 @@
 import React, { useState, useEffect, useRef } from "react";
 import { marked } from "marked";
 import axios from "axios";
+import toast from "react-hot-toast";
 import Button from "../components/Button";
 
 const ChatBot = () => {
   const [text, settext] = useState("");
-  const [chatHistory, setChatHistory] = useState(
-    JSON.parse(sessionStorage.getItem("chatHistory")) || []
-  );
+
+  // Initialize chatHistory as an empty array
+  const [chatHistory, setChatHistory] = useState([]);
+
   const chatContainerRef = useRef(null);
 
-  // update history
-  const previousHistory = async () => {
+  // Fetch chat history from the backend
+  const fetchChatHistory = async () => {
     const jwt = localStorage.getItem("authToken");
-    const { data } = await axios.get(
-      "http://localhost:5000/api/v1/genAi/updateHistory",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${jwt}`,
-        },
-      }
-    );
-    console.log(data);
-    sessionStorage.setItem("chatHistory", JSON.stringify(data));
-    setChatHistory(data);
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/v1/genAi/updateHistory",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      sessionStorage.setItem("chatHistory", JSON.stringify(data));
+      setChatHistory(data.length > 0 ? data : [
+        { role: "model", parts: [{ text: "Hi there! I'm your friendly chatbot, here to assist you. How can I help?" }] }
+      ]);
+    } catch (error) {
+      console.error("Error fetching chat history:", error);
+      setChatHistory([{ role: "model", parts: [{ text: "Hi there! I'm your friendly chatbot, here to assist you. How can I help?" }] }]);
+    }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Add user input to history
-    const newChatHistory = [
-      ...chatHistory,
-      { role: "user", parts: [{ text: text }] },
-    ];
+    // Check if user is logged in
+    const jwt = localStorage.getItem("authToken");
+    if (!jwt) {
+      toast.error("You need to log in to use the chatbot.");
+      return;
+    }
+
+    // Create a new user message
+    const userMessage = { role: "user", parts: [{ text: text }] };
+
+    // If chat history is empty, add the default message before the user's message
+    const newChatHistory = chatHistory.length > 0
+      ? [...chatHistory, userMessage]
+      : [
+        { role: "model", parts: [{ text: "Hi there! I'm your friendly chatbot, here to assist you. How can I help?" }] },
+        userMessage,
+      ];
+
     sessionStorage.setItem("chatHistory", JSON.stringify(newChatHistory));
     setChatHistory(newChatHistory);
     console.log(newChatHistory);
 
     try {
-      const jwt = localStorage.getItem("authToken");
       const { data } = await axios.post(
         "http://localhost:5000/api/v1/genAi/chatbot",
         { text },
@@ -57,7 +76,6 @@ const ChatBot = () => {
       // Add bot response to history
       const updatedChatHistory = [
         ...newChatHistory,
-        // { role: "bot", text: res },
         { role: "model", parts: [{ text: res }] },
       ];
       sessionStorage.setItem("chatHistory", JSON.stringify(updatedChatHistory));
@@ -66,7 +84,38 @@ const ChatBot = () => {
       // Clear input field
       settext("");
     } catch (err) {
-      console.log(err);
+      console.error("Error:", err);
+    }
+  };
+
+
+
+  // Function to delete chat history
+  const clearChatHistory = async () => {
+    console.log("Clearing chat history...");
+
+    const jwt = localStorage.getItem("authToken");
+    if (!jwt) {
+      toast.error("You need to log in to clear chat history.");
+      return;
+    }
+
+    try {
+      console.log("test test test");
+      await axios.delete("http://localhost:5000/api/v1/genAi/clearchat", {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      // Clear the chat history in state and session storage
+      setChatHistory([]); // Reset local chat history state
+      sessionStorage.removeItem("chatHistory"); // Clear session storage
+      toast.success("Chat history cleared!");
+    } catch (error) {
+      console.error("Error clearing chat history:", error);
+      toast.error("Failed to clear chat history.");
     }
   };
 
@@ -78,20 +127,16 @@ const ChatBot = () => {
     }
   }, [chatHistory]);
 
+  // Fetch chat history on component mount
   useEffect(() => {
-    // console.log(21, chatHistory)
-    if (chatHistory.length == 0) previousHistory();
+    fetchChatHistory(); // Fetch chat history from the backend
   }, []);
 
   return (
     <div className="overflow-auto ">
-
       <div className="w-4/5 mx-auto ">
-
-
         <div className="w-4/5 mx-auto">
           <div className="flex items-center justify-between mt-2">
-
             <div className="loader">
               <div className="modelViewPort">
                 <div className="eva">
@@ -113,14 +158,18 @@ const ChatBot = () => {
 
 
             <h1 className="text-center">𝙰𝙸 𝙲𝚑𝚊𝚝𝙱𝚘𝚝 </h1>
-            <div className="ml-auto">
-              <Button />
+
+            <div
+              className="ml-auto cursor-pointer" // Add cursor pointer to indicate it's clickable
+              onClick={clearChatHistory} // Attach the click handler
+            >
+              {/* Replace this with your animated div */}
+              <div className="animated-clear-chat">
+                <Button />
+              </div>
             </div>
           </div>
         </div>
-
-
-
 
         <div
           style={{
@@ -129,11 +178,11 @@ const ChatBot = () => {
           className="m-auto max-h-[77%] overflow-hidden bg-dark p-0 rounded-lg border border-[#e5e7eb] w-4/5 h-auto"
         >
           <div
-            className="overflow-auto h-[550px] pt-4 pb-4 ml-5" // Set a fixed height
+            className="overflow-auto h-[550px] pt-4 pb-4 ml-5"
             ref={chatContainerRef}
-            style={{ padding: 0, margin: 0 }} // Attach ref to container
+            style={{ padding: 0, margin: 0 }}
           >
-            {/* initial message */}
+
             <div className="flex ml-2 text-left flex-row mb-4">
               <img
                 src="/images/logo.png"
@@ -149,65 +198,84 @@ const ChatBot = () => {
               >
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: marked(
-                      "Hi there! I'm your friendly chatbot, here to assist you. How can I help?"
-                    ),
+                    __html: marked("Hi there! I'm your friendly chatbot, here to assist you. How can I help?"), // Default message
                   }}
                 />
               </div>
             </div>
-
-            {chatHistory.map((message, index) => (
-              <div
-                key={index}
-                className={`chat ${message.role === "user" ? "chat-end" : "chat-start"
-                  }`}
-              >
-                {message.role === "user" ? (
-                  <div className="flex mr-2 flex-row-reverse mb-4">
-                    <img
-                      src="/images/user.png"
-                      className="h-8 ms-0.1 ml-2 rounded-full bg-white p-0.5"
-                      alt="User Logo"
-                    />
-                    <div
-                      className={`p-3 ms-3`}
-                      style={{
-                        borderRadius: 15,
-                        backgroundColor: "rgba(57, 192, 237,.2)",
-                      }}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: marked(message.parts[0].text),
-                        }}
+            {chatHistory.length > 0 ? (
+              chatHistory.map((message, index) => (
+                <div
+                  key={index}
+                  className={`chat ${message.role === "user" ? "chat-end" : "chat-start"}`}
+                >
+                  {message.role === "user" ? (
+                    <div className="flex mr-2 flex-row-reverse mb-4">
+                      <img
+                        src="/images/user.png"
+                        className="h-8 ms-0.1 ml-2 rounded-full bg-white p-0.5"
+                        alt="User Logo"
                       />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex ml-2 text-left flex-row mb-4">
-                    <img
-                      src="/images/logo.png"
-                      className="h-8 me-0.1 mr-2 rounded-full bg-white p-0.5"
-                      alt="Tool-E Logo"
-                    />
-                    <div
-                      className={`p-3 me-3 max-w-4xl`}
-                      style={{
-                        borderRadius: 15,
-                        backgroundColor: "rgba(0, 0, 0, .2)",
-                      }}
-                    >
                       <div
-                        dangerouslySetInnerHTML={{
-                          __html: marked(message.parts[0].text),
+                        className={`p-3 ms-3`}
+                        style={{
+                          borderRadius: 15,
+                          backgroundColor: "rgba(57, 192, 237,.2)",
                         }}
-                      />
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: marked(message.parts[0].text),
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
+                  ) : (
+                    <div className="flex ml-2 text-left flex-row mb-4">
+                      <img
+                        src="/images/logo.png"
+                        className="h-8 me-0.1 mr-2 rounded-full bg-white p-0.5"
+                        alt="Tool-E Logo"
+                      />
+                      <div
+                        className={`p-3 me-3 max-w-4xl`}
+                        style={{
+                          borderRadius: 15,
+                          backgroundColor: "rgba(0, 0, 0, .2)",
+                        }}
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: marked(message.parts[0].text),
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="flex ml-2 text-left flex-row mb-4">
+                <img
+                  src="/images/logo.png"
+                  className="h-8 me-0.1 mr-2 rounded-full bg-white p-0.5"
+                  alt="Tool-E Logo"
+                />
+                <div
+                  className={`p-3 me-3`}
+                  style={{
+                    borderRadius: 15,
+                    backgroundColor: "rgba(0, 0, 0, .2)",
+                  }}
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: marked("Hi there! I'm your friendly chatbot, here to assist you. How can I help?"), // Default message
+                    }}
+                  />
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -229,7 +297,6 @@ const ChatBot = () => {
           </form>
         </div>
       </div>
-
     </div>
   );
 };
