@@ -198,3 +198,31 @@ export const updateHistory = async (req, res) => {
     console.log(error);
   }
 };
+
+export const clearHistory = async (req, res) => {
+  console.log("test");
+
+  try {
+    jwt.verify(req.token, process.env.JWT_ACCESS_SECRET, async (err, data) => {
+      if (err || !data) {
+        console.log("Token expired or invalid");
+        return res.status(200).json({ message: "Login Session Expired" });
+      }
+
+      const user = await User.findOne({ _id: data.id });
+      if (!user) {
+        console.log("User not found");
+        return res.status(400).json("Invalid User");
+      }
+
+      await User.findByIdAndUpdate(user._id, {
+        $set: { ChatBotHistory: [] },
+      });
+
+      return res.status(200).json("Chat History Cleared, default messages retained");
+    });
+  } catch (error) {
+    console.log("Error while clearing chat history:", error);
+    return res.status(500).json("Internal Server Error");
+  }
+};

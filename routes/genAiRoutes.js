@@ -6,6 +6,7 @@ import {
   jsconverterController,
   scifiImageController,
   updateHistory,
+  clearHistory,
 } from "../controllers/genAiController.js"; 
 import verifyToken from "../middlewares/verifyToken.js";
 
@@ -18,5 +19,6 @@ router.post("/chatbot",verifyToken, chatbotController);
 router.post("/js-converter", jsconverterController);
 router.post("/scifi-image", scifiImageController);
 router.get("/updateHistory", verifyToken, updateHistory);
+router.delete("/clearchat", verifyToken, clearHistory);
 
 export default router;
