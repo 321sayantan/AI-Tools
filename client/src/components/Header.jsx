@@ -90,7 +90,7 @@ const Header = () => {
                   Tailor TOOL-E to fit your specific needs and preferences.
                 </p>
                 <p>
-                  <a className="btn btn-lg btn-primary" href="#">
+                  <a className="btn btn-lg btn-primary" href="/imageGallary">
                     Browse gallery
                   </a>
                 </p>

@@ -10,6 +10,7 @@ import Paragraph from "./pages/Paragraph";
 import ScifiImage from "./pages/ScifiImage";
 import ChatBot from "./pages/ChatBot";
 import JsConverter from "./pages/JsConverter"
+import ImageGallary from "./pages/ImageGallary";
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/scifi-image" element={<ScifiImage />} />
           <Route path="/chatbot" element={<ChatBot />} />
           <Route path="/js-converter" element={<JsConverter />} />
+          <Route path="/imageGallary" element={<ImageGallary />} />
         </Routes>
     </>
   );

@@ -9,7 +9,7 @@ const ToolsList = () => {
         <>
         <div id="tools-list" className=" back toolslist" >
         <Heading />
-            <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-0" style={{ display: "flex", height: "500px", minHeight: '500px', margin: '0 60px' }}>
+            <div className="row row-cols-1 row-cols-lg-5 align-items-stretch g-4 py-5 home mt-0" style={{ display: "flex", minHeight: '500px', margin: '0 60px' }}>
 
                 <div className="col cardstyle " onClick={() => navigate("/summary")} style={{ cursor: "pointer" }}>
                     <div

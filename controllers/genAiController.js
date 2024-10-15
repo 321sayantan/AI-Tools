@@ -4,11 +4,20 @@ import fs from "node:fs";
 import axios from "axios";
 import FormData from "form-data";
 import jwt from "jsonwebtoken";
+import cloudinary from "cloudinary";
 import User from "../models/usermodel.js";
+import Image from "../models/imageModel.js";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
+import { Images } from "openai/resources/images.mjs";
 
 dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const summaryController = async (req, res) => {
   try {
@@ -43,7 +52,7 @@ export const scifiImageController = async (req, res) => {
       "Content-Type": "application/json",
     },
     data: {
-      prompt: text || "cyberpunk cat",
+      prompt: "colourful "+text || "cyberpunk cat",
     },
     responseType: "arraybuffer",
   };
@@ -57,12 +66,30 @@ export const scifiImageController = async (req, res) => {
 
       fs.writeFileSync(imagePath, Buffer.from(response.data));
 
-      const imageUrl = `${req.protocol}://${req.get("host")}/${uniqueFilename}`;
+      const cloudinaryResult = cloudinary.v2.uploader
+        .upload(imagePath, {
+          folder: "Tool-E",
+        })
+        .then(async (result) => {
+          // console.log(7, result);
 
-      res.json({
-        message: "Image generated and saved successfully!",
-        imageUrl,
-      });
+          const imageurl = result.secure_url;
+
+          const newimage = new Image({
+            imageURL: imageurl
+          })
+          const image = await newimage.save();
+
+          // Delete the local file after successful upload
+          fs.unlinkSync(imagePath);
+          console.log("Local image deleted:", imagePath);
+
+          res.json({
+            message: "Image generated and saved successfully!",
+            imageurl,         
+          });
+        });
+
     } else {
       throw new Error(`${response.status}: ${response.data.toString()}`);
     }
@@ -174,7 +201,7 @@ export const chatbotController = async (req, res) => {
       }
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 };
 
@@ -200,7 +227,6 @@ export const updateHistory = async (req, res) => {
 };
 
 export const clearHistory = async (req, res) => {
-  console.log("test");
 
   try {
     jwt.verify(req.token, process.env.JWT_ACCESS_SECRET, async (err, data) => {
@@ -228,3 +254,25 @@ export const clearHistory = async (req, res) => {
     return res.status(500).json("Internal Server Error");
   }
 };
+
+export const getimage = async (req, res) =>{
+  try {
+    const images = await Image.find().sort({ createdAt: -1 }).limit(10);
+    // console.log(images);
+    return res.status(200).json(images);
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+
+
+// const uniqueFilename = `${uuidv4()}.webp`;
+// const imagePath = path.join(process.cwd(), "public", uniqueFilename);
+
+// fs.writeFileSync(imagePath, Buffer.from(response.data));
+
+// const imageUrl = `${req.protocol}://${req.get("host")}/${uniqueFilename}`;
