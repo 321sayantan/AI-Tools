@@ -29,7 +29,8 @@ const Summary = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/genAi/summary",
+        // "http://localhost:5000/api/v1/genAi/summary",
+        "https://tool-e.onrender.com/api/v1/genAi/summary",
         { text }
       );
       console.log(data);

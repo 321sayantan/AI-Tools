@@ -6,7 +6,7 @@ import errorResponse from "../utils/errorResponse.js";
 export const sendToken = (user, statusCode, res) => {
   const token = user.getSignedToken(res);
   // console.log(user)
-  console.log(token)
+  // console.log(token)
 
     // res.cookie("token", token.accessToken, {
     //   // httpOnly: true, // Makes the cookie inaccessible to JavaScript on the frontend
@@ -47,7 +47,7 @@ export const registerController = async (req, res, next) => {
 export const loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body)
+    // console.log(req.body)
     // validation
     if (!email || !password) {
       return next(new errorResponse("Please provide email and password"));

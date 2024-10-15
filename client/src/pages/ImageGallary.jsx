@@ -8,7 +8,8 @@ const ImageGallary = () => {
   const fetchImage = async()=>{
     try {
       const result = await axios.get(
-        "http://localhost:5000/api/v1/genAi/getImages"
+        // "http://localhost:5000/api/v1/genAi/getImages"
+        "https://tool-e.onrender.com/api/v1/genAi/getImages"
       );
       console.log(result.data);
       // console.log(result.data[0].imageURL);

@@ -26,7 +26,11 @@ const Paragraph = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/v1/genAi/paragraph", { text });
+      const { data } = await axios.post(
+        // "http://localhost:5000/api/v1/genAi/paragraph",
+        "https://tool-e.onrender.com/api/v1/genAi/paragraph",
+        { text }
+      );
       console.log(data);
       setPara(data);
     } catch (err) {

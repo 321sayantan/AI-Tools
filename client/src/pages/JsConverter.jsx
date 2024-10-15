@@ -27,9 +27,13 @@ const JsConverter = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/v1/genAi/js-converter", {
-        text,
-      });
+      const { data } = await axios.post(
+        // "http://localhost:5000/api/v1/genAi/js-converter",
+        "https://tool-e.onrender.com/api/v1/genAi/js-converter",
+        {
+          text,
+        }
+      );
       // console.log(data);
       const res = marked.parse(data);
       setCode(res);

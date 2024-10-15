@@ -17,7 +17,8 @@ const ChatBot = () => {
     const jwt = localStorage.getItem("authToken");
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/v1/genAi/updateHistory",
+        // "http://localhost:5000/api/v1/genAi/updateHistory",
+        "https://tool-e.onrender.com/api/v1/genAi/updateHistory",
         {
           headers: {
             "Content-Type": "application/json",
@@ -62,7 +63,8 @@ const ChatBot = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/genAi/chatbot",
+        // "http://localhost:5000/api/v1/genAi/chatbot",
+        "https://tool-e.onrender.com/api/v1/genAi/chatbot",
         { text },
         {
           headers: {
@@ -103,7 +105,8 @@ const ChatBot = () => {
 
     try {
       console.log("test test test");
-      await axios.delete("http://localhost:5000/api/v1/genAi/clearchat", {
+      // await axios.delete("http://localhost:5000/api/v1/genAi/clearchat", {
+      await axios.delete("https://tool-e.onrender.com/api/v1/genAi/clearchat", {
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${jwt}`,
