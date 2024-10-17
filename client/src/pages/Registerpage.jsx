@@ -38,7 +38,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/v1/auth/register", { username, email, password });
+      await axios.post(
+        // "http://localhost:5000/api/v1/auth/register",
+        "https://tool-e.onrender.com/api/v1/auth/register",
+        { username, email, password }
+      );
       toast.success("User Registered Successfully");
       navigate("/login");
     } catch (err) {

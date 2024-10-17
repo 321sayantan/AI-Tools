@@ -2,7 +2,7 @@
   "name": "ai-tools",
   "private": true,
   "version": "0.0.0",
-  "proxy": "http://localhost:5000",
+  "proxy": "https://tool-e.onrender.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -28,6 +28,7 @@
     "react-scripts": "^5.0.1",
     "remarkable": "^2.0.1",
     "soft-ui-design-system": "^1.0.4",
+    "react-hot-toast": "^2.4.1",
     "text-formatter-js": "^0.0.1",
     "zustand": "^5.0.0-rc.2"
   },
