@@ -257,7 +257,7 @@ export const clearHistory = async (req, res) => {
 
 export const getimage = async (req, res) =>{
   try {
-    const images = await Image.find().sort({ createdAt: -1 }).limit(10);
+    const images = await Image.find().sort({ createdAt: -1 }).limit(21);
     // console.log(images);
     return res.status(200).json(images);
 

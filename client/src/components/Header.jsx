@@ -44,7 +44,7 @@ const Header = () => {
                   your workflow.
                 </p>
                 <p>
-                  <a className="btn btn-lg btn-primary" href="/register">
+                  <a className="btn btn-lg md:btn-sm btn-primary" href="/register">
                     Sign up today
                   </a>
                 </p>

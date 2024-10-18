@@ -22,3 +22,15 @@ body {
 .custom-bg-dark .nav-link:hover {
   color: #cccccc; 
 }
+
+@media screen and (max-width: 768px) {
+  .res{
+    display: none;
+  }  
+}
+
+@media screen and (min-width: 768px) {
+  .res1{
+    display: none;
+  }    
+}
